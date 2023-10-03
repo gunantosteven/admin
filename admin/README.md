@@ -2,15 +2,12 @@
 
 A new Flutter project.
 
-## Getting Started
+## Using RiverPod State Management
 
-This project is a starting point for a Flutter application.
+https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/
 
-A few resources to get you started if this is your first Flutter project:
+## Reference Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+https://github.com/vhodiak/flutter_ddd_riverpod_example
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod
