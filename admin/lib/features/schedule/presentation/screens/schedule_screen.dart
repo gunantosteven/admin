@@ -1,3 +1,4 @@
+import 'package:admin/app/app_env.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(EnvInfo.appName),
             const Text(
               'You have pushed the button this many times:',
             ),
