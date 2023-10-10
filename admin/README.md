@@ -11,3 +11,5 @@ https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introducti
 https://github.com/vhodiak/flutter_ddd_riverpod_example
 
 https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod
+
+## Run build runner command

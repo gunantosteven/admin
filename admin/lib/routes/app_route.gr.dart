@@ -15,13 +15,33 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    NewScheduleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const NewScheduleScreen(),
+      );
+    },
     ScheduleRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ScheduleScreen(),
       );
-    }
+    },
   };
+}
+
+/// generated route for
+/// [NewScheduleScreen]
+class NewScheduleRoute extends PageRouteInfo<void> {
+  const NewScheduleRoute({List<PageRouteInfo>? children})
+      : super(
+          NewScheduleRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NewScheduleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
