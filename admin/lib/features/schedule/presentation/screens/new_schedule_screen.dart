@@ -4,6 +4,7 @@ import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_textfield.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class NewScheduleScreen extends StatefulWidget {
@@ -16,15 +17,25 @@ class NewScheduleScreen extends StatefulWidget {
 }
 
 class _NewScheduleScreenState extends State<NewScheduleScreen> {
-  final TextEditingController jobController =
-      TextEditingController(text: 'Job');
+  final TextEditingController jobController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    jobController.text = AppLocalizations.of(context)!.job;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('New Schedule'),
+        title: Text(AppLocalizations.of(context)!.newSchedule),
       ),
       body: Padding(
         padding: AppPadding.all24,
@@ -35,7 +46,7 @@ class _NewScheduleScreenState extends State<NewScheduleScreen> {
             ),
             AppSpacer.height24,
             CustomButton(
-              text: 'Save',
+              text: AppLocalizations.of(context)!.save,
               onPressed: () => {},
             ),
           ],
