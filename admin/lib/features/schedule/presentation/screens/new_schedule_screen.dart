@@ -1,5 +1,5 @@
-import 'package:admin/shared/theme/padding.dart';
-import 'package:admin/shared/theme/spacer.dart';
+import 'package:admin/shared/theme/app_padding.dart';
+import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_textfield.dart';
 import 'package:auto_route/auto_route.dart';

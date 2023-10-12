@@ -15,3 +15,7 @@ https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod
 ## Run build runner command
 
 flutter pub run build_runner watch --delete-conflicting-outputs
+
+## Run Widgetbook
+
+bash flutter run -d macos -t lib/widgetbook/widgetbook.dart
