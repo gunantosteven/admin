@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+## How to run
+
+Change .env.example to .env and change the data inside.
+
 ## Using RiverPod State Management
 
 https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/
