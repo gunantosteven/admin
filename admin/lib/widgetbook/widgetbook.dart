@@ -12,6 +12,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'widgetbook.directories.g.dart';
 
 void main() {
+// ignore: missing_provider_scope
   runApp(const WidgetbookApp());
 }
 

@@ -69,6 +69,9 @@ dependencies:
 
   # Easily configure any flutter application with global variables using a `.env` file.
   flutter_dotenv: ^5.1.0
+
+  # A package exposing annotations for riverpod_generator
+  riverpod_annotation: ^2.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -91,6 +94,13 @@ dev_dependencies:
 
   # Classes and helper functions that support JSON code generation via the `json_serializable` package.
   json_serializable: ^6.7.1
+
+  # Riverpod_lint is a developer tool for users of Riverpod, designed to help stop common issues and simplify repetitive tasks.
+  custom_lint:
+  riverpod_lint:
+
+  # A code generator for Riverpod. This both simplifies the syntax empowers it, such as allowing stateful hot-reload.
+  riverpod_generator: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
