@@ -2,5 +2,10 @@
     "schedule": "Jadwal",
     "newSchedule": "Jadwal Baru",
     "save": "Simpan",
-    "job": "Pekerjaan"
+    "job": "Pekerjaan",
+    "register": "Daftar",
+    "email": "Email",
+    "password": "Password",
+    "login": "Masuk",
+    "loginScreen": "Log In"
 }

@@ -6,3 +6,9 @@ final supabaseServiceProvider = riverpod.Provider<SupabaseClient>(
     return Supabase.instance.client;
   },
 );
+
+final supabaseAuthServiceProvider = riverpod.Provider<GoTrueClient>(
+  (ref) {
+    return ref.watch(supabaseServiceProvider).auth;
+  },
+);

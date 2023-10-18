@@ -1,4 +1,5 @@
 import 'package:admin/routes/app_route.dart';
+import 'package:admin/shared/domain/providers/supabase_service_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,9 +21,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     _redirect();
   }
 
-  _redirect() {
-    Future<void>.delayed(const Duration(milliseconds: 1000))
-        .then((value) => AutoRouter.of(context).replace(const ScheduleRoute()));
+  _redirect() async {
+    await Future.delayed(Duration.zero);
+    if (!mounted) {
+      return;
+    }
+
+    final session = ref.watch(supabaseAuthServiceProvider).currentSession;
+
+    if (session != null) {
+      AutoRouter.of(context).replace(const ScheduleRoute());
+    } else {
+      AutoRouter.of(context).replace(const LoginRoute());
+    }
   }
 
   @override

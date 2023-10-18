@@ -2,5 +2,10 @@
   "schedule": "Schedule",
   "newSchedule": "New Schedule",
   "save": "Save",
-  "job": "Job"
+  "job": "Job",
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "loginScreen": "Log In"
 }
