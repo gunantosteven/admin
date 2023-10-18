@@ -6,6 +6,8 @@ A new Flutter project.
 
 Change .env.example to .env and change the data inside.
 
+then run flutter pub run build_runner watch --delete-conflicting-outputs
+
 ## Using RiverPod State Management
 
 https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/
