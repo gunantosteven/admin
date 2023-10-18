@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class SplashScreen extends ConsumerStatefulWidget {
-  static const routeName = '/SplashScreen';
+  static const routeName = '/';
 
   const SplashScreen({super.key});
 

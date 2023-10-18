@@ -1,5 +1,5 @@
 import 'package:admin/features/schedule/data/datasource/schedule_data_source.dart';
-import 'package:admin/features/schedule/data/repositories.dart/schedule_repository_impl.dart';
+import 'package:admin/features/schedule/data/repositories/schedule_repository_impl.dart';
 import 'package:admin/features/schedule/domain/repositories/schedule_repository.dart';
 import 'package:admin/shared/domain/providers/supabase_service_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;

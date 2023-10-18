@@ -1,3 +1,4 @@
+import 'package:admin/features/auth/presentation/providers/state/auth_providers.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
@@ -48,7 +49,11 @@ class _NewScheduleScreenState extends ConsumerState<LoginScreen> {
             AppSpacer.height24,
             CustomButton(
               text: AppLocalizations.of(context)!.login,
-              onPressed: () async {},
+              onPressed: () async {
+                ref
+                    .read(authStateNotifierProvider.notifier)
+                    .signInWithOtp(email: emailController.text);
+              },
             ),
           ],
         ),
