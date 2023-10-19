@@ -32,7 +32,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     if (session != null) {
       AutoRouter.of(context).replace(const ScheduleRoute());
     } else {
-      AutoRouter.of(context).replace(const LoginRoute());
+      AutoRouter.of(context).replace(const AuthRoute());
     }
   }
 

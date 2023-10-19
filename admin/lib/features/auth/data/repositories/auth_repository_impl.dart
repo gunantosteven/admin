@@ -9,7 +9,22 @@ class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl(this.dataSource);
 
   @override
+  Future<Either<AppException, bool>> signUp(
+      {required String email, required String password}) {
+    return dataSource.signUp(email: email, password: password);
+  }
+
+  @override
   Future<Either<AppException, bool>> signInWithOtp({required String email}) {
     return dataSource.signInWithOtp(email: email);
+  }
+
+  @override
+  Future<Either<AppException, bool>> signInWithPassword(
+      {required String email, required String password}) {
+    return dataSource.signInWithPassword(
+      email: email,
+      password: password,
+    );
   }
 }

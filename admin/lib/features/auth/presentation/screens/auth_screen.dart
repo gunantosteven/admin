@@ -1,4 +1,6 @@
 import 'package:admin/features/auth/presentation/providers/state/auth_providers.dart';
+import 'package:admin/features/auth/presentation/providers/state/auth_state.dart';
+import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
@@ -9,16 +11,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class LoginScreen extends ConsumerStatefulWidget {
-  static const routeName = '/RegisterScreen';
+class AuthScreen extends ConsumerStatefulWidget {
+  static const routeName = '/AuthScreen';
 
-  const LoginScreen({super.key});
+  const AuthScreen({super.key});
 
   @override
-  ConsumerState<LoginScreen> createState() => _NewScheduleScreenState();
+  ConsumerState<AuthScreen> createState() => _LoginScreenState();
 }
 
-class _NewScheduleScreenState extends ConsumerState<LoginScreen> {
+class _LoginScreenState extends ConsumerState<AuthScreen> {
   final TextEditingController emailController = TextEditingController();
 
   @override
@@ -33,6 +35,19 @@ class _NewScheduleScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+      authStateNotifierProvider.select((value) => value),
+      ((previous, next) {
+        //show Snackbar on failure
+        if (next is Failure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(next.exception.message.toString())));
+        } else if (next is Success) {
+          AutoRouter.of(context)
+              .pushAndPopUntil(const ScheduleRoute(), predicate: (_) => false);
+        }
+      }),
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -48,13 +63,15 @@ class _NewScheduleScreenState extends ConsumerState<LoginScreen> {
             ),
             AppSpacer.height24,
             CustomButton(
-              text: AppLocalizations.of(context)!.login,
+              text: AppLocalizations.of(context)!.loginRegister,
               onPressed: () async {
-                ref
-                    .read(authStateNotifierProvider.notifier)
-                    .signInWithOtp(email: emailController.text);
+                ref.read(authStateNotifierProvider.notifier).signInWithOtp(
+                      email: emailController.text,
+                    );
               },
             ),
+            AppSpacer.height24,
+            const Text('Click link in the email to login'),
           ],
         ),
       ),

@@ -7,5 +7,7 @@
   "email": "Email",
   "password": "Password",
   "login": "Login",
-  "loginScreen": "Log In"
+  "loginScreen": "Log In",
+  "registerScreen": "Register",
+   "loginRegister": "Login / Register"
 }

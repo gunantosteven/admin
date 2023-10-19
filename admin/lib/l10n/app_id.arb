@@ -7,5 +7,7 @@
     "email": "Email",
     "password": "Password",
     "login": "Masuk",
-    "loginScreen": "Log In"
+    "loginScreen": "Log In",
+    "registerScreen": "Daftar",
+    "loginRegister": "Masuk / Daftar"
 }
