@@ -1,9 +1,9 @@
 import 'package:admin/features/auth/presentation/providers/state/auth_providers.dart';
 import 'package:admin/features/auth/presentation/providers/state/auth_state.dart';
-import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
+import 'package:admin/shared/widgets/custom_snackbar.dart';
 import 'package:admin/shared/widgets/custom_textfield.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -40,11 +40,15 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
       ((previous, next) {
         //show Snackbar on failure
         if (next is Failure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(next.exception.message.toString())));
+          CustomSnackbar.show(
+              context: context,
+              type: ToastType.ERROR,
+              text: next.exception.message.toString());
         } else if (next is Success) {
-          AutoRouter.of(context)
-              .pushAndPopUntil(const ScheduleRoute(), predicate: (_) => false);
+          CustomSnackbar.show(
+              context: context,
+              type: ToastType.SUCCESS,
+              text: 'Check your email to login');
         }
       }),
     );
@@ -63,15 +67,13 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
             ),
             AppSpacer.height24,
             CustomButton(
-              text: AppLocalizations.of(context)!.loginRegister,
+              text: AppLocalizations.of(context)!.login,
               onPressed: () async {
                 ref.read(authStateNotifierProvider.notifier).signInWithOtp(
                       email: emailController.text,
                     );
               },
             ),
-            AppSpacer.height24,
-            const Text('Click link in the email to login'),
           ],
         ),
       ),

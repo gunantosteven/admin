@@ -18,4 +18,10 @@ class AppColors {
 
   /// Extra Light grey color
   static const Color extraLightGrey = Color(0xffE1E8ED);
+
+  /// App green color
+  static const Color green = Color(0xff186F65);
+
+  /// App red color
+  static const Color red = Color(0xffFF8080);
 }
