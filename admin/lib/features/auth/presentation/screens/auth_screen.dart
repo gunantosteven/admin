@@ -3,6 +3,7 @@ import 'package:admin/features/auth/presentation/providers/state/auth_state.dart
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
+import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_snackbar.dart';
 import 'package:admin/shared/widgets/custom_textfield.dart';
 import 'package:auto_route/auto_route.dart';
@@ -57,25 +58,38 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(AppLocalizations.of(context)!.loginScreen),
       ),
-      body: Padding(
-        padding: AppPadding.all24,
-        child: Column(
-          children: [
-            CustomTextField(
-              controller: emailController,
-              placeholder: AppLocalizations.of(context)!.email,
+      body: Stack(
+        children: [
+          Padding(
+            padding: AppPadding.all24,
+            child: Column(
+              children: [
+                CustomTextField(
+                  controller: emailController,
+                  placeholder: AppLocalizations.of(context)!.email,
+                ),
+                AppSpacer.height24,
+                CustomButton(
+                  text: AppLocalizations.of(context)!.login,
+                  onPressed: () async {
+                    ref.read(authStateNotifierProvider.notifier).signInWithOtp(
+                          email: emailController.text,
+                        );
+                  },
+                ),
+              ],
             ),
-            AppSpacer.height24,
-            CustomButton(
-              text: AppLocalizations.of(context)!.login,
-              onPressed: () async {
-                ref.read(authStateNotifierProvider.notifier).signInWithOtp(
-                      email: emailController.text,
-                    );
-              },
-            ),
-          ],
-        ),
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              final state = ref.watch(authStateNotifierProvider);
+              if (state is Loading) {
+                return const CustomLoading();
+              }
+              return Container();
+            },
+          ),
+        ],
       ),
     );
   }
