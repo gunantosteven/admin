@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class NewScheduleScreen extends ConsumerStatefulWidget {
-  static const routeName = '/NewScheduleScreen';
+  static const routeName = '/new-schedule';
 
   const NewScheduleScreen({super.key});
 

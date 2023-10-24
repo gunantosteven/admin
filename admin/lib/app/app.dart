@@ -1,4 +1,6 @@
 import 'package:admin/routes/app_route.dart';
+import 'package:admin/shared/extension/list_extension.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,7 +18,17 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(useMaterial3: true),
-      routerConfig: _appRouter.config(),
+      routerConfig: _appRouter.config(deepLinkBuilder: (deepLink) {
+        // Check if path in routes or not
+        final route = _appRouter.routes
+            .firstWhereOrNull((element) => element.path == deepLink.path);
+
+        if (route == null) {
+          return DeepLink.defaultPath;
+        }
+
+        return deepLink;
+      }),
       debugShowCheckedModeBanner: false,
     );
   }

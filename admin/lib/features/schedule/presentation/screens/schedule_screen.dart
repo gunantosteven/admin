@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class ScheduleScreen extends StatefulWidget {
-  static const routeName = '/ScheduleScreen';
+  static const routeName = '/schedule';
 
   const ScheduleScreen({super.key});
 

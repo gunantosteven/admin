@@ -13,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
 class AuthScreen extends ConsumerStatefulWidget {
-  static const routeName = '/AuthScreen';
+  static const routeName = '/auth';
 
   const AuthScreen({super.key});
 

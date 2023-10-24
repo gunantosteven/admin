@@ -18,9 +18,13 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         /// routes go here
-        AutoRoute(page: SplashRoute.page, initial: true),
-        AutoRoute(page: AuthRoute.page),
-        AutoRoute(page: ScheduleRoute.page),
-        AutoRoute(page: NewScheduleRoute.page),
+        AutoRoute(
+            page: SplashRoute.page,
+            initial: true,
+            path: SplashScreen.routeName),
+        AutoRoute(page: AuthRoute.page, path: AuthScreen.routeName),
+        AutoRoute(page: ScheduleRoute.page, path: ScheduleScreen.routeName),
+        AutoRoute(
+            page: NewScheduleRoute.page, path: NewScheduleScreen.routeName),
       ];
 }
