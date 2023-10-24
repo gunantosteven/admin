@@ -15,7 +15,7 @@ Future<void> mainCommon(AppEnvironment environment) async {
     url: EnvInfo.supabaseString,
     anonKey: EnvInfo.supabaseAnonKey,
   );
-  runApp(ProviderScope(
+  runApp(const ProviderScope(
     child: MyApp(),
   ));
 }
