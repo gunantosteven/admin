@@ -6,10 +6,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> addSchedule(
       {required ScheduleModel scheduleModel});
+  Stream<List<ScheduleModel>> streamSchedule();
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
   final SupabaseClient supabaseClient;
+  final tableName = 'schedule';
 
   ScheduleSupabaseDataSource(this.supabaseClient);
 
@@ -17,7 +19,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> addSchedule(
       {required ScheduleModel scheduleModel}) async {
     try {
-      await supabaseClient.from('schedule').insert(
+      await supabaseClient.from(tableName).insert(
         {'id': scheduleModel.id, 'job': scheduleModel.job},
       );
       return Right(scheduleModel);
@@ -30,5 +32,21 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
         ),
       );
     }
+  }
+
+  @override
+  Stream<List<ScheduleModel>> streamSchedule() {
+    final stream = supabaseClient
+        .from(tableName)
+        .stream(primaryKey: ['id'])
+        .limit(20)
+        .map((event) {
+          var list = <ScheduleModel>[];
+          for (final item in event) {
+            list.add(ScheduleModel.fromJson(item));
+          }
+          return list;
+        });
+    return stream;
   }
 }

@@ -14,4 +14,9 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
       {required ScheduleModel scheduleModel}) {
     return dataSource.addSchedule(scheduleModel: scheduleModel);
   }
+
+  @override
+  Stream<List<ScheduleModel>> streamSchedule() {
+    return dataSource.streamSchedule();
+  }
 }
