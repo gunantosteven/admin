@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> addSchedule(
       {required ScheduleModel scheduleModel});
-  Stream<List<ScheduleModel>> streamSchedule();
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule();
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
@@ -35,18 +35,29 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   }
 
   @override
-  Stream<List<ScheduleModel>> streamSchedule() {
-    final stream = supabaseClient
-        .from(tableName)
-        .stream(primaryKey: ['id'])
-        .limit(20)
-        .map((event) {
-          var list = <ScheduleModel>[];
-          for (final item in event) {
-            list.add(ScheduleModel.fromJson(item));
-          }
-          return list;
-        });
-    return stream;
+  Future<Either<AppException, Stream<List<ScheduleModel>>>>
+      streamSchedule() async {
+    try {
+      final stream = supabaseClient
+          .from(tableName)
+          .stream(primaryKey: ['id'])
+          .limit(20)
+          .map((event) {
+            var list = <ScheduleModel>[];
+            for (final item in event) {
+              list.add(ScheduleModel.fromJson(item));
+            }
+            return list;
+          });
+      return Right(stream);
+    } catch (e) {
+      return Left(
+        AppException(
+          message: 'Unknown error occured',
+          statusCode: 1,
+          identifier: '${e.toString()}ScheduleDataSource.addSchedule',
+        ),
+      );
+    }
   }
 }

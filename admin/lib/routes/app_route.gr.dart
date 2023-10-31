@@ -21,16 +21,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AuthScreen(),
       );
     },
+    ListScheduleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ListScheduleScreen(),
+      );
+    },
     NewScheduleRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const NewScheduleScreen(),
-      );
-    },
-    ScheduleRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ScheduleScreen(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -57,6 +57,20 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ListScheduleScreen]
+class ListScheduleRoute extends PageRouteInfo<void> {
+  const ListScheduleRoute({List<PageRouteInfo>? children})
+      : super(
+          ListScheduleRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ListScheduleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [NewScheduleScreen]
 class NewScheduleRoute extends PageRouteInfo<void> {
   const NewScheduleRoute({List<PageRouteInfo>? children})
@@ -66,20 +80,6 @@ class NewScheduleRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'NewScheduleRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ScheduleScreen]
-class ScheduleRoute extends PageRouteInfo<void> {
-  const ScheduleRoute({List<PageRouteInfo>? children})
-      : super(
-          ScheduleRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ScheduleRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

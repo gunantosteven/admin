@@ -9,5 +9,6 @@
   "login": "Login",
   "loginScreen": "Log In",
   "registerScreen": "Register",
-   "loginRegister": "Login / Register"
+  "loginRegister": "Login / Register",
+  "somethingWrong": "Something Wrong"
 }

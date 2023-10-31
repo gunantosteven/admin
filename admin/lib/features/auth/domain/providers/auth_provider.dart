@@ -6,14 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final authDataSourceProvider =
-    riverpod.Provider.family<AuthDataSource, SupabaseClient>(
+    riverpod.Provider.family.autoDispose<AuthDataSource, SupabaseClient>(
   (ref, supabaseClient) {
     final goTrueClient = ref.watch(supabaseAuthServiceProvider);
     return AuthSupabaseDataSource(supabaseClient, goTrueClient);
   },
 );
 
-final authRepositoryProvider = riverpod.Provider<AuthRepository>(
+final authRepositoryProvider = riverpod.Provider.autoDispose<AuthRepository>(
   (ref) {
     final SupabaseClient supabaseClientService =
         ref.watch(supabaseServiceProvider);

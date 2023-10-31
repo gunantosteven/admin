@@ -9,5 +9,6 @@
     "login": "Masuk",
     "loginScreen": "Log In",
     "registerScreen": "Daftar",
-    "loginRegister": "Masuk / Daftar"
+    "loginRegister": "Masuk / Daftar",
+    "somethingWrong": "Terjadi Kesalahan"
 }

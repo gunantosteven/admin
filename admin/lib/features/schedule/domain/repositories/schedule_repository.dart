@@ -5,5 +5,5 @@ import 'package:dartz/dartz.dart';
 abstract class ScheduleRepository {
   Future<Either<AppException, ScheduleModel>> addSchedule(
       {required ScheduleModel scheduleModel});
-  Stream<List<ScheduleModel>> streamSchedule();
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule();
 }

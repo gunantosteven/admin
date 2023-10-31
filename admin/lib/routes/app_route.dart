@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/presentation/screens/schedule_screen.dart';
+import 'package:admin/features/schedule/presentation/screens/list_schedule_screen.dart';
 import 'package:admin/features/schedule/presentation/screens/new_schedule_screen.dart';
 import 'package:admin/features/splash/presentation/screens/splash_screen.dart';
 import 'package:admin/features/auth/presentation/screens/auth_screen.dart';
@@ -30,8 +30,8 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
           path: AuthScreen.routeName,
         ),
         AutoRoute(
-          page: ScheduleRoute.page,
-          path: ScheduleScreen.routeName,
+          page: ListScheduleRoute.page,
+          path: ListScheduleScreen.routeName,
         ),
         AutoRoute(
           page: NewScheduleRoute.page,

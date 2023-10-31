@@ -1,14 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final supabaseServiceProvider = riverpod.Provider<SupabaseClient>(
-  (ref) {
-    return Supabase.instance.client;
-  },
-);
+part 'supabase_service_provider.g.dart';
 
-final supabaseAuthServiceProvider = riverpod.Provider<GoTrueClient>(
-  (ref) {
-    return ref.watch(supabaseServiceProvider).auth;
-  },
-);
+@riverpod
+SupabaseClient supabaseService(SupabaseServiceRef ref) {
+  return Supabase.instance.client;
+}
+
+@riverpod
+GoTrueClient supabaseAuthService(SupabaseAuthServiceRef ref) {
+  return ref.watch(supabaseServiceProvider).auth;
+}
