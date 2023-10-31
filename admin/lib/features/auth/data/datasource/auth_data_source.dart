@@ -53,7 +53,7 @@ class AuthSupabaseDataSource implements AuthDataSource {
           AppException(
             message: e.message,
             statusCode: 1,
-            identifier: '${e.toString()}AuthSupabaseDataSource.loginEmail',
+            identifier: '${e.toString()}AuthSupabaseDataSource.signInWithOtp',
           ),
         );
       }
@@ -61,7 +61,7 @@ class AuthSupabaseDataSource implements AuthDataSource {
         AppException(
           message: 'Unknown error occured',
           statusCode: 1,
-          identifier: '${e.toString()}AuthSupabaseDataSource.loginEmail',
+          identifier: '${e.toString()}AuthSupabaseDataSource.signInWithOtp',
         ),
       );
     }
@@ -82,7 +82,7 @@ class AuthSupabaseDataSource implements AuthDataSource {
         AppException(
           message: 'Unknown error occured',
           statusCode: 1,
-          identifier: 'User is null signInWithPassword.loginEmail',
+          identifier: 'User is null AuthSupabaseDataSource.signInWithPassword',
         ),
       );
     } catch (e) {
@@ -90,7 +90,8 @@ class AuthSupabaseDataSource implements AuthDataSource {
         AppException(
           message: 'Unknown error occured',
           statusCode: 1,
-          identifier: '${e.toString()}signInWithPassword.loginEmail',
+          identifier:
+              '${e.toString()}AuthSupabaseDataSource.signInWithPassword',
         ),
       );
     }

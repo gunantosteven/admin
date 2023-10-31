@@ -1,7 +1,6 @@
 import 'package:admin/features/schedule/application/schedule_list_controller.dart';
 import 'package:admin/features/schedule/presentation/widgets/custom_list_schedule.dart';
 import 'package:admin/routes/app_route.dart';
-import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';

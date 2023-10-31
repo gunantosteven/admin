@@ -1,5 +1,4 @@
-import 'package:admin/features/auth/presentation/providers/state/auth_providers.dart';
-import 'package:admin/features/auth/presentation/providers/state/auth_state.dart';
+import 'package:admin/features/auth/application/auth_controller.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
@@ -36,23 +35,32 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(
-      authStateNotifierProvider.select((value) => value),
-      ((previous, next) {
-        //show Snackbar on failure
-        if (next is Failure) {
-          CustomSnackbar.show(
+    ref.listen<AsyncValue<bool?>>(authControllerProvider, (previous, next) {
+      next.when(
+          data: (data) {
+            if (data == true) {
+              CustomSnackbar.show(
+                  context: context,
+                  type: ToastType.SUCCESS,
+                  text: 'Check your email to login');
+            } else {
+              CustomSnackbar.show(
+                context: context,
+                type: ToastType.ERROR,
+                text: AppLocalizations.of(context)!.somethingWrong,
+              );
+            }
+          },
+          error: (o, s) {
+            CustomSnackbar.show(
               context: context,
               type: ToastType.ERROR,
-              text: next.exception.message.toString());
-        } else if (next is Success) {
-          CustomSnackbar.show(
-              context: context,
-              type: ToastType.SUCCESS,
-              text: 'Check your email to login');
-        }
-      }),
-    );
+              text: o.toString(),
+            );
+          },
+          loading: () {});
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -72,7 +80,7 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
                 CustomButton(
                   text: AppLocalizations.of(context)!.login,
                   onPressed: () async {
-                    ref.read(authStateNotifierProvider.notifier).signInWithOtp(
+                    ref.read(authControllerProvider.notifier).signInWithOtp(
                           email: emailController.text,
                         );
                   },
@@ -82,11 +90,11 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
           ),
           Consumer(
             builder: (context, ref, child) {
-              final state = ref.watch(authStateNotifierProvider);
-              if (state is Loading) {
-                return const CustomLoading();
-              }
-              return Container();
+              final state = ref.watch(authControllerProvider);
+
+              return state.maybeWhen(
+                  loading: () => const CustomLoading(),
+                  orElse: () => Container());
             },
           ),
         ],

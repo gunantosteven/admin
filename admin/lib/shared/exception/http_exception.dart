@@ -12,6 +12,7 @@ class AppException implements Exception {
     required this.statusCode,
     required this.identifier,
   });
+
   @override
   String toString() {
     return 'statusCode=$statusCode\nmessage=$message\nidentifier=$identifier';
