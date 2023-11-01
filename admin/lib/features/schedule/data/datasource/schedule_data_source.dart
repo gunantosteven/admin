@@ -22,7 +22,10 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       {required ScheduleModel scheduleModel}) async {
     try {
       await supabaseClient.from(tableName).insert(
-        {'id': generateNewUuid, 'job': scheduleModel.job},
+        {
+          ScheduleModel.idKey: generateNewUuid,
+          ScheduleModel.jobKey: scheduleModel.job
+        },
       );
       return Right(scheduleModel.copyWith.call(id: generateNewUuid));
     } catch (e) {
@@ -42,7 +45,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
     try {
       final stream = supabaseClient
           .from(tableName)
-          .stream(primaryKey: ['id'])
+          .stream(primaryKey: [ScheduleModel.idKey])
           .limit(20)
           .map((event) {
             var list = <ScheduleModel>[];

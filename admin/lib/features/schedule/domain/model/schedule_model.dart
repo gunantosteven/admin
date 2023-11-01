@@ -15,10 +15,10 @@ class ScheduleModel with _$ScheduleModel {
     @Default('') String job,
   }) = _ScheduleModel;
 
+  static const idKey = 'id';
+  static const jobKey = 'job';
+
   /// Serialization
   factory ScheduleModel.fromJson(Map<String, dynamic> json) =>
       _$ScheduleModelFromJson(json);
-
-  // @override
-  // Map<String, dynamic> toJson() => _$OrganizationEntityToJson(this);
 }
