@@ -10,5 +10,6 @@
   "loginScreen": "Log In",
   "registerScreen": "Register",
   "loginRegister": "Login / Register",
-  "somethingWrong": "Something Wrong"
+  "somethingWrong": "Something Wrong",
+  "newScheduleAdded": "New Schedule Added"
 }

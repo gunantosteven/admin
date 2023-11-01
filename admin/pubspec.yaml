@@ -72,6 +72,9 @@ dependencies:
 
   # A package exposing annotations for riverpod_generator
   riverpod_annotation: ^2.2.1
+
+  # RFC4122 (v1, v4, v5, v6, v7, v8) UUID Generator and Parser for Dart
+  uuid: ^4.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/application/schedule_list_controller.dart';
+import 'package:admin/features/schedule/application/list_schedule_controller.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:flutter/widgets.dart';
@@ -15,7 +15,7 @@ class CustomListSchedule extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final schedules = ref.watch(scheduleListControllerProvider);
+    final schedules = ref.watch(listScheduleControllerProvider);
     return schedules.when(
       data: (stream) => StreamBuilder(
         stream: stream,

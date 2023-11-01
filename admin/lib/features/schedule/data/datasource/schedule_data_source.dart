@@ -1,5 +1,6 @@
 import 'package:admin/features/schedule/domain/model/schedule_model.dart';
 import 'package:admin/shared/exception/http_exception.dart';
+import 'package:admin/shared/utils/uuid.dart';
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -11,7 +12,8 @@ abstract class ScheduleDataSource {
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
   final SupabaseClient supabaseClient;
-  final tableName = 'schedule';
+
+  static const tableName = 'schedule';
 
   ScheduleSupabaseDataSource(this.supabaseClient);
 
@@ -20,9 +22,9 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       {required ScheduleModel scheduleModel}) async {
     try {
       await supabaseClient.from(tableName).insert(
-        {'id': scheduleModel.id, 'job': scheduleModel.job},
+        {'id': generateNewUuid, 'job': scheduleModel.job},
       );
-      return Right(scheduleModel);
+      return Right(scheduleModel.copyWith.call(id: generateNewUuid));
     } catch (e) {
       return Left(
         AppException(

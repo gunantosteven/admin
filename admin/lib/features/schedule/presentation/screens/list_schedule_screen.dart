@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/application/schedule_list_controller.dart';
+import 'package:admin/features/schedule/application/list_schedule_controller.dart';
 import 'package:admin/features/schedule/presentation/widgets/custom_list_schedule.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
@@ -20,7 +20,7 @@ class ListScheduleScreen extends ConsumerStatefulWidget {
 class _ScheduleScreenState extends ConsumerState<ListScheduleScreen> {
   @override
   Widget build(BuildContext context) {
-    final schedules = ref.watch(scheduleListControllerProvider);
+    final schedules = ref.watch(listScheduleControllerProvider);
 
     return Scaffold(
       appBar: AppBar(

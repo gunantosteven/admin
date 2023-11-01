@@ -10,5 +10,6 @@
     "loginScreen": "Log In",
     "registerScreen": "Daftar",
     "loginRegister": "Masuk / Daftar",
-    "somethingWrong": "Terjadi Kesalahan"
+    "somethingWrong": "Terjadi Kesalahan",
+    "newScheduleAdded": "Jadwal Baru Ditambahkan"
 }
