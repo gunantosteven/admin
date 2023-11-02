@@ -30,7 +30,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final session = ref.watch(supabaseAuthServiceProvider).currentSession;
 
     if (session != null) {
-      AutoRouter.of(context).replace(const ListScheduleRoute());
+      AutoRouter.of(context).replace(const DashboardRoute());
     } else {
       AutoRouter.of(context).replace(const AuthRoute());
     }
