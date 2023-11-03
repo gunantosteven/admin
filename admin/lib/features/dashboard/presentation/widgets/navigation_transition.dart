@@ -1,7 +1,5 @@
-import 'package:admin/features/dashboard/presentation/widgets/navigation_drawer_section.dart';
 import 'package:admin/features/dashboard/presentation/widgets/rail_transition.dart';
 import 'package:flutter/material.dart';
-import 'bar_transition.dart';
 
 class NavigationTransition extends StatefulWidget {
   const NavigationTransition(
@@ -10,7 +8,6 @@ class NavigationTransition extends StatefulWidget {
       required this.animationController,
       required this.railAnimation,
       required this.navigationRail,
-      required this.navigationBar,
       required this.appBar,
       required this.body});
 
@@ -18,7 +15,6 @@ class NavigationTransition extends StatefulWidget {
   final AnimationController animationController;
   final CurvedAnimation railAnimation;
   final Widget navigationRail;
-  final Widget navigationBar;
   final PreferredSizeWidget appBar;
   final Widget body;
 
@@ -65,12 +61,6 @@ class _NavigationTransitionState extends State<NavigationTransition> {
           widget.body,
         ],
       ),
-      bottomNavigationBar: BarTransition(
-        animation: barAnimation,
-        backgroundColor: colorScheme.surface,
-        child: widget.navigationBar,
-      ),
-      endDrawer: const NavigationDrawerSection(),
     );
   }
 }

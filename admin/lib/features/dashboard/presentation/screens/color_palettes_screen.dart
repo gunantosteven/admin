@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 const Widget divider = SizedBox(height: 10);
 
@@ -57,12 +56,12 @@ class ColorPalettesScreen extends StatelessWidget {
                 style: const TextStyle(decoration: TextDecoration.underline),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
-                    final url = Uri.parse(
-                      'https://pub.dev/packages/dynamic_color',
-                    );
-                    if (!await launchUrl(url)) {
-                      throw Exception('Could not launch $url');
-                    }
+                    // final url = Uri.parse(
+                    //   'https://pub.dev/packages/dynamic_color',
+                    // );
+                    // if (!await launchUrl(url)) {
+                    //   throw Exception('Could not launch $url');
+                    // }
                   },
               ),
               const TextSpan(text: ' package.'),

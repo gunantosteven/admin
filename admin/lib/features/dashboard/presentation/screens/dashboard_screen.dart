@@ -1,7 +1,6 @@
 import 'package:admin/features/dashboard/presentation/screens/color_palettes_screen.dart';
 import 'package:admin/features/dashboard/presentation/screens/elevation_screen.dart';
 import 'package:admin/features/dashboard/presentation/screens/typography_screen.dart';
-import 'package:admin/features/dashboard/presentation/widgets/navigation_bars.dart';
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -107,9 +106,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
       leading: IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {
-          setState(() {
-            showMediumSizeLayout = !showMediumSizeLayout;
-          });
+          final AnimationStatus status = controller.status;
+          if (status != AnimationStatus.forward &&
+              status != AnimationStatus.completed) {
+            controller.forward();
+          } else {
+            controller.reverse();
+          }
         },
       ),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
@@ -165,16 +168,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
               ),
             ),
           ),
-          navigationBar: NavigationBars(
-            onSelectItem: (index) {
-              setState(() {
-                screenIndex = index;
-                handleScreenChanged(screenIndex);
-              });
-            },
-            selectedIndex: screenIndex,
-            isExampleBar: false,
-          ),
         );
       },
     );
@@ -228,13 +221,6 @@ class _ExpandedTrailingActions extends StatelessWidget {
                   onChanged: (value) {
                     // handleBrightnessChange(value);
                   })
-            ],
-          ),
-          Row(
-            children: [
-              const Text('Material 3'),
-              Expanded(child: Container()),
-              Switch(value: true, onChanged: (_) {})
             ],
           ),
         ],
