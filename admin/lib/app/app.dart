@@ -19,8 +19,8 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(useMaterial3: true),
       routerConfig: appRouter.config(deepLinkBuilder: (deepLink) {
         // Check if path in routes or not
-        final route = appRouter.routes
-            .firstWhereOrNull((element) => element.path == deepLink.path);
+        final route = appRouter.routes.firstWhereOrNull(
+            (element) => deepLink.path.startsWith(element.path));
 
         if (route == null) {
           return DeepLink.defaultPath;

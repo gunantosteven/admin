@@ -8,16 +8,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class ListScheduleScreen extends ConsumerStatefulWidget {
-  static const routeName = '/list-schedule';
+class ScheduleScreen extends ConsumerStatefulWidget {
+  static const routeName = 'schedule';
 
-  const ListScheduleScreen({super.key});
+  const ScheduleScreen({super.key});
 
   @override
-  ConsumerState<ListScheduleScreen> createState() => _ScheduleScreenState();
+  ConsumerState<ScheduleScreen> createState() => _ScheduleScreenState();
 }
 
-class _ScheduleScreenState extends ConsumerState<ListScheduleScreen> {
+class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     final schedules = ref.watch(listScheduleControllerProvider);

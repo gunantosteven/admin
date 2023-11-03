@@ -1,5 +1,8 @@
+import 'package:admin/features/dashboard/presentation/screens/color_palettes_screen.dart';
 import 'package:admin/features/dashboard/presentation/screens/dashboard_screen.dart';
-import 'package:admin/features/schedule/presentation/screens/list_schedule_screen.dart';
+import 'package:admin/features/dashboard/presentation/screens/elevation_screen.dart';
+import 'package:admin/features/dashboard/presentation/screens/typography_screen.dart';
+import 'package:admin/features/schedule/presentation/screens/schedule_screen.dart';
 import 'package:admin/features/schedule/presentation/screens/new_schedule_screen.dart';
 import 'package:admin/features/splash/presentation/screens/splash_screen.dart';
 import 'package:admin/features/auth/presentation/screens/auth_screen.dart';
@@ -33,10 +36,20 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         AutoRoute(
           page: DashboardRoute.page,
           path: DashboardScreen.routeName,
-        ),
-        AutoRoute(
-          page: ListScheduleRoute.page,
-          path: ListScheduleScreen.routeName,
+          children: [
+            RedirectRoute(path: '', redirectTo: ScheduleScreen.routeName),
+            AutoRoute(
+              path: ScheduleScreen.routeName,
+              page: ScheduleRoute.page,
+            ),
+            AutoRoute(
+                path: ColorPalettesScreen.routeName,
+                page: ColorPalettesRoute.page),
+            AutoRoute(
+                path: TypographyScreen.routeName, page: TypographyRoute.page),
+            AutoRoute(
+                path: ElevationScreen.routeName, page: ElevationRoute.page),
+          ],
         ),
         AutoRoute(
           page: NewScheduleRoute.page,

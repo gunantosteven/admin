@@ -1,7 +1,5 @@
-import 'package:admin/features/dashboard/presentation/screens/color_palettes_screen.dart';
-import 'package:admin/features/dashboard/presentation/screens/elevation_screen.dart';
-import 'package:admin/features/dashboard/presentation/screens/typography_screen.dart';
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
+import 'package:admin/routes/app_route.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +24,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
   bool showMediumSizeLayout = false;
   bool showLargeSizeLayout = false;
 
-  int screenIndex = ScreenSelected.component.value;
+  int screenIndex = 0;
 
   @override
   void initState() {
@@ -80,26 +78,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
     }
   }
 
-  void handleScreenChanged(int screenSelected) {
-    setState(() {
-      screenIndex = screenSelected;
-    });
-  }
-
-  Widget createScreenFor(
-      ScreenSelected screenSelected, bool showNavBarExample) {
-    switch (screenSelected) {
-      case ScreenSelected.component:
-        return const Text('Hello World');
-      case ScreenSelected.color:
-        return const ColorPalettesScreen();
-      case ScreenSelected.typography:
-        return const TypographyScreen();
-      case ScreenSelected.elevation:
-        return const ElevationScreen();
-    }
-  }
-
   PreferredSizeWidget createAppBar() {
     return AppBar(
       title: const Text('Admin App'),
@@ -142,32 +120,43 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
-        return NavigationTransition(
-          scaffoldKey: scaffoldKey,
-          animationController: controller,
-          railAnimation: railAnimation,
-          appBar: createAppBar(),
-          body: createScreenFor(
-              ScreenSelected.values[screenIndex], controller.value == 1),
-          navigationRail: NavigationRail(
-            extended: showLargeSizeLayout,
-            destinations: navRailDestinations,
-            selectedIndex: screenIndex,
-            onDestinationSelected: (index) {
-              setState(() {
-                screenIndex = index;
-                handleScreenChanged(screenIndex);
-              });
-            },
-            trailing: Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: showLargeSizeLayout
-                    ? const _ExpandedTrailingActions()
-                    : _trailingActions(),
+        return AutoTabsRouter(
+          routes: const [
+            ScheduleRoute(),
+            ColorPalettesRoute(),
+            TypographyRoute(),
+            ElevationRoute()
+          ],
+          builder: (ctx, child) {
+            final tabsRouter = AutoTabsRouter.of(ctx);
+
+            screenIndex = tabsRouter.activeIndex;
+
+            return NavigationTransition(
+              scaffoldKey: scaffoldKey,
+              animationController: controller,
+              railAnimation: railAnimation,
+              appBar: createAppBar(),
+              body: Expanded(child: child),
+              navigationRail: NavigationRail(
+                extended: showLargeSizeLayout,
+                destinations: navRailDestinations,
+                selectedIndex: screenIndex,
+                onDestinationSelected: (index) {
+                  screenIndex = index;
+                  tabsRouter.setActiveIndex(screenIndex);
+                },
+                trailing: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: showLargeSizeLayout
+                        ? const _ExpandedTrailingActions()
+                        : _trailingActions(),
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

@@ -13,22 +13,12 @@ const double largeWidthBreakpoint = 1500;
 
 const double transitionLength = 500;
 
-enum ScreenSelected {
-  component(0),
-  color(1),
-  typography(2),
-  elevation(3);
-
-  const ScreenSelected(this.value);
-  final int value;
-}
-
 const List<NavigationDestination> appBarDestinations = [
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.widgets_outlined),
-    label: 'Components',
-    selectedIcon: Icon(Icons.widgets),
+    icon: Icon(Icons.schedule_outlined),
+    label: 'Schedule',
+    selectedIcon: Icon(Icons.schedule),
   ),
   NavigationDestination(
     tooltip: '',

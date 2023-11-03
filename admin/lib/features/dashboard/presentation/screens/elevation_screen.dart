@@ -2,9 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class ElevationScreen extends StatelessWidget {
+  static const routeName = 'elevation';
+
   const ElevationScreen({super.key});
 
   @override

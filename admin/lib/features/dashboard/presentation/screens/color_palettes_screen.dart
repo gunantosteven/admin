@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,10 @@ const Widget divider = SizedBox(height: 10);
 // be displayed in a row.
 const double narrowScreenWidthThreshold = 400;
 
+@RoutePage()
 class ColorPalettesScreen extends StatelessWidget {
+  static const routeName = 'colors';
+
   const ColorPalettesScreen({super.key});
 
   @override

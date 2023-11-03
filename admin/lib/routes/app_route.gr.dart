@@ -21,16 +21,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AuthScreen(),
       );
     },
+    ColorPalettesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ColorPalettesScreen(),
+      );
+    },
     DashboardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const DashboardScreen(),
       );
     },
-    ListScheduleRoute.name: (routeData) {
+    ElevationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ListScheduleScreen(),
+        child: const ElevationScreen(),
       );
     },
     NewScheduleRoute.name: (routeData) {
@@ -39,10 +45,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const NewScheduleScreen(),
       );
     },
+    ScheduleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ScheduleScreen(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
+      );
+    },
+    TypographyRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TypographyScreen(),
       );
     },
   };
@@ -63,6 +81,20 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ColorPalettesScreen]
+class ColorPalettesRoute extends PageRouteInfo<void> {
+  const ColorPalettesRoute({List<PageRouteInfo>? children})
+      : super(
+          ColorPalettesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ColorPalettesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [DashboardScreen]
 class DashboardRoute extends PageRouteInfo<void> {
   const DashboardRoute({List<PageRouteInfo>? children})
@@ -77,15 +109,15 @@ class DashboardRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ListScheduleScreen]
-class ListScheduleRoute extends PageRouteInfo<void> {
-  const ListScheduleRoute({List<PageRouteInfo>? children})
+/// [ElevationScreen]
+class ElevationRoute extends PageRouteInfo<void> {
+  const ElevationRoute({List<PageRouteInfo>? children})
       : super(
-          ListScheduleRoute.name,
+          ElevationRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ListScheduleRoute';
+  static const String name = 'ElevationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -105,6 +137,20 @@ class NewScheduleRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ScheduleScreen]
+class ScheduleRoute extends PageRouteInfo<void> {
+  const ScheduleRoute({List<PageRouteInfo>? children})
+      : super(
+          ScheduleRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ScheduleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -114,6 +160,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TypographyScreen]
+class TypographyRoute extends PageRouteInfo<void> {
+  const TypographyRoute({List<PageRouteInfo>? children})
+      : super(
+          TypographyRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TypographyRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
