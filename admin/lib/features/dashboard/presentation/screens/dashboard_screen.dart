@@ -138,23 +138,33 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
               railAnimation: railAnimation,
               appBar: createAppBar(),
               body: Expanded(child: child),
-              navigationRail: NavigationRail(
-                extended: showLargeSizeLayout,
-                destinations: navRailDestinations,
-                selectedIndex: screenIndex,
-                onDestinationSelected: (index) {
-                  screenIndex = index;
-                  tabsRouter.setActiveIndex(screenIndex);
-                },
-                trailing: Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: showLargeSizeLayout
-                        ? const _ExpandedTrailingActions()
-                        : _trailingActions(),
+              navigationRail: LayoutBuilder(builder: (context, constraint) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints(minHeight: constraint.maxHeight),
+                    child: IntrinsicHeight(
+                      child: NavigationRail(
+                        extended: showLargeSizeLayout,
+                        destinations: navRailDestinations,
+                        selectedIndex: screenIndex,
+                        onDestinationSelected: (index) {
+                          screenIndex = index;
+                          tabsRouter.setActiveIndex(screenIndex);
+                        },
+                        trailing: Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: showLargeSizeLayout
+                                ? const _ExpandedTrailingActions()
+                                : _trailingActions(),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
             );
           },
         );
