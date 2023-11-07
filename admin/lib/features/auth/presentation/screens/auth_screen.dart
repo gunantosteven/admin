@@ -1,4 +1,5 @@
 import 'package:admin/features/auth/application/auth_controller.dart';
+import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
@@ -39,10 +40,14 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
       next.when(
           data: (data) {
             if (data == true) {
-              CustomSnackbar.show(
-                  context: context,
-                  type: ToastType.SUCCESS,
-                  text: 'Check your email to login');
+              if (ref.read(authControllerProvider.notifier).isAlreadyLogin()) {
+                AutoRouter.of(context).replace(const DashboardRoute());
+              } else {
+                CustomSnackbar.show(
+                    context: context,
+                    type: ToastType.SUCCESS,
+                    text: 'Check your email to login');
+              }
             } else {
               CustomSnackbar.show(
                 context: context,
@@ -83,6 +88,20 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
                     ref.read(authControllerProvider.notifier).signInWithOtp(
                           email: emailController.text,
                         );
+                  },
+                ),
+                AppSpacer.height24,
+                CustomButton(
+                  text: AppLocalizations.of(context)!.anonymousLogin,
+                  onPressed: () async {
+                    // For Demo Purpose Only
+                    // Will be deleted later
+                    // Supabase not supported yet anonymous login
+                    // https://github.com/supabase/gotrue/issues/68
+                    ref
+                        .read(authControllerProvider.notifier)
+                        .signInWithPassword(
+                            email: 'admin@ungapps.com', password: 'test123');
                   },
                 ),
               ],

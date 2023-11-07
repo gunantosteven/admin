@@ -11,5 +11,6 @@
   "registerScreen": "Register",
   "loginRegister": "Login / Register",
   "somethingWrong": "Something Wrong",
-  "newScheduleAdded": "New Schedule Added"
+  "newScheduleAdded": "New Schedule Added",
+  "anonymousLogin": "Login as anonymous"
 }

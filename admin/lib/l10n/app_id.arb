@@ -11,5 +11,6 @@
     "registerScreen": "Daftar",
     "loginRegister": "Masuk / Daftar",
     "somethingWrong": "Terjadi Kesalahan",
-    "newScheduleAdded": "Jadwal Baru Ditambahkan"
+    "newScheduleAdded": "Jadwal Baru Ditambahkan",
+    "anonymousLogin": "Masuk sebagai anonim"
 }
