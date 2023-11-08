@@ -31,7 +31,8 @@ class CustomListSchedule extends ConsumerWidget {
               itemCount: list.length,
               padding: padding,
               itemBuilder: (context, index) {
-                return Text(list[index].job);
+                return Text(
+                    '${list[index].job} ${list[index].createdAt?.toString() ?? ''}');
               },
             );
           }

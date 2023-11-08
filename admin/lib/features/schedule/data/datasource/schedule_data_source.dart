@@ -24,7 +24,8 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       await supabaseClient.from(tableName).insert(
         {
           ScheduleModel.idKey: generateNewUuid,
-          ScheduleModel.jobKey: scheduleModel.job
+          ScheduleModel.jobKey: scheduleModel.job,
+          ScheduleModel.createdAtKey: DateTime.now().toString(),
         },
       );
       return Right(scheduleModel.copyWith.call(id: generateNewUuid));
@@ -46,6 +47,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       final stream = supabaseClient
           .from(tableName)
           .stream(primaryKey: [ScheduleModel.idKey])
+          .order(ScheduleModel.createdAtKey, ascending: false)
           .limit(20)
           .map((event) {
             var list = <ScheduleModel>[];
