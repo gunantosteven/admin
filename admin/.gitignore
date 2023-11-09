@@ -34,6 +34,7 @@ migrate_working_dir/
 **/*.freezed.dart
 **/*.mocks.dart
 **/*.g.dart
+**/*.gr.dart
 *.env
 
 # Symbolication related
