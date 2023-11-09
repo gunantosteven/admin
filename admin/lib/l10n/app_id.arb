@@ -1,6 +1,7 @@
 {
     "schedule": "Jadwal",
     "newSchedule": "Jadwal Baru",
+    "updateSchedule": "Ubah Jadwal",
     "save": "Simpan",
     "job": "Pekerjaan",
     "register": "Daftar",
@@ -12,5 +13,6 @@
     "loginRegister": "Masuk / Daftar",
     "somethingWrong": "Terjadi Kesalahan",
     "newScheduleAdded": "Jadwal Baru Ditambahkan",
+    "scheduleUpdated": "Jadwal Berhasil Diubah",
     "anonymousLogin": "Masuk sebagai anonim"
 }

@@ -1,9 +1,10 @@
 import 'package:admin/features/schedule/application/list_schedule_controller.dart';
+import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/extension/date_extension.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,12 +34,16 @@ class CustomListSchedule extends ConsumerWidget {
               itemCount: list.length,
               padding: padding,
               itemBuilder: (context, index) {
+                final scheduleModel = list[index];
                 return ListTile(
                   key: Key(index.toString()),
-                  title: Text(list[index].job),
-                  subtitle: Text(
-                      list[index].createdAt?.string(DateType.simpleDateTime) ??
-                          ''),
+                  title: Text(scheduleModel.job),
+                  subtitle: Text(scheduleModel.createdAt
+                          ?.string(DateType.simpleDateTime) ??
+                      ''),
+                  onTap: () => AutoRouter.of(context).push(
+                    UpdateScheduleRoute(scheduleModel: scheduleModel),
+                  ),
                 );
               },
             );

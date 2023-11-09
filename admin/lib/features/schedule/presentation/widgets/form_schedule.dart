@@ -7,15 +7,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class NewFormSchedule extends ConsumerWidget {
-  NewFormSchedule({
+class FormSchedule extends ConsumerWidget {
+  const FormSchedule({
     super.key,
     this.padding = AppPadding.all24,
+    required this.jobController,
   });
 
   final EdgeInsetsGeometry padding;
 
-  final TextEditingController jobController = TextEditingController();
+  final TextEditingController jobController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

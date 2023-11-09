@@ -1,6 +1,7 @@
 {
   "schedule": "Schedule",
   "newSchedule": "New Schedule",
+  "updateSchedule": "Update Schedule",
   "save": "Save",
   "job": "Job",
   "register": "Register",
@@ -12,5 +13,6 @@
   "loginRegister": "Login / Register",
   "somethingWrong": "Something Wrong",
   "newScheduleAdded": "New Schedule Added",
+  "scheduleUpdated": "Schedule Updated",
   "anonymousLogin": "Login as anonymous"
 }

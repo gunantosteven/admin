@@ -9,21 +9,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class NewScheduleScreen extends ConsumerStatefulWidget {
-  static const routeName = '/new-schedule';
+class UpdateScheduleScreen extends ConsumerStatefulWidget {
+  static const routeName = '/update-schedule';
 
-  const NewScheduleScreen({super.key});
+  const UpdateScheduleScreen({super.key, required this.scheduleModel});
+
+  final ScheduleModel scheduleModel;
 
   @override
-  ConsumerState<NewScheduleScreen> createState() => _NewScheduleScreenState();
+  ConsumerState<UpdateScheduleScreen> createState() =>
+      _NewScheduleScreenState();
 }
 
-class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
+class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
   final TextEditingController _jobController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+
+    _jobController.text = widget.scheduleModel.job;
   }
 
   @override
@@ -41,7 +46,7 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
               CustomSnackbar.show(
                   context: context,
                   type: ToastType.SUCCESS,
-                  text: AppLocalizations.of(context)!.newScheduleAdded);
+                  text: AppLocalizations.of(context)!.scheduleUpdated);
               AutoRouter.of(context).back();
             }
           },
@@ -58,7 +63,7 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(AppLocalizations.of(context)!.newSchedule),
+        title: Text(AppLocalizations.of(context)!.updateSchedule),
       ),
       body: Stack(
         children: [

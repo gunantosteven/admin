@@ -63,6 +63,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TypographyScreen(),
       );
     },
+    UpdateScheduleRoute.name: (routeData) {
+      final args = routeData.argsAs<UpdateScheduleRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: UpdateScheduleScreen(
+          key: args.key,
+          scheduleModel: args.scheduleModel,
+        ),
+      );
+    },
   };
 }
 
@@ -176,4 +186,42 @@ class TypographyRoute extends PageRouteInfo<void> {
   static const String name = 'TypographyRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UpdateScheduleScreen]
+class UpdateScheduleRoute extends PageRouteInfo<UpdateScheduleRouteArgs> {
+  UpdateScheduleRoute({
+    Key? key,
+    required ScheduleModel scheduleModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          UpdateScheduleRoute.name,
+          args: UpdateScheduleRouteArgs(
+            key: key,
+            scheduleModel: scheduleModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'UpdateScheduleRoute';
+
+  static const PageInfo<UpdateScheduleRouteArgs> page =
+      PageInfo<UpdateScheduleRouteArgs>(name);
+}
+
+class UpdateScheduleRouteArgs {
+  const UpdateScheduleRouteArgs({
+    this.key,
+    required this.scheduleModel,
+  });
+
+  final Key? key;
+
+  final ScheduleModel scheduleModel;
+
+  @override
+  String toString() {
+    return 'UpdateScheduleRouteArgs{key: $key, scheduleModel: $scheduleModel}';
+  }
 }
