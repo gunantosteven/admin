@@ -19,8 +19,8 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       themeMode: themeMode,
-      theme: AppThemeData.lightTheme,
-      darkTheme: AppThemeData.darkTheme,
+      theme: AppThemeData.lightTheme(ref),
+      darkTheme: AppThemeData.darkTheme(ref),
       routerConfig: appRouter.config(deepLinkBuilder: (deepLink) {
         // Check if path in routes or not
         final route = appRouter.routes.firstWhereOrNull(

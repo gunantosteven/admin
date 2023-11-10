@@ -1,6 +1,8 @@
+import 'package:admin/shared/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const Widget divider = SizedBox(height: 10);
 
@@ -10,22 +12,15 @@ const Widget divider = SizedBox(height: 10);
 const double narrowScreenWidthThreshold = 400;
 
 @RoutePage()
-class ColorPalettesScreen extends StatelessWidget {
+class ColorPalettesScreen extends ConsumerWidget {
   static const routeName = 'colors';
 
   const ColorPalettesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Color selectedColor = Theme.of(context).primaryColor;
-    ThemeData lightTheme = ThemeData(
-      colorSchemeSeed: selectedColor,
-      brightness: Brightness.light,
-    );
-    ThemeData darkTheme = ThemeData(
-      colorSchemeSeed: selectedColor,
-      brightness: Brightness.dark,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    ThemeData lightTheme = AppThemeData.lightTheme(ref);
+    ThemeData darkTheme = AppThemeData.darkTheme(ref);
 
     Widget schemeLabel(String brightness) {
       return Padding(

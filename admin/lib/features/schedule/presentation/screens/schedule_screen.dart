@@ -24,7 +24,6 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(AppLocalizations.of(context)!.schedule),
       ),
       body: schedules.when(
