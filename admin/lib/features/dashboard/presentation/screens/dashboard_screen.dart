@@ -1,5 +1,6 @@
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
 import 'package:admin/routes/app_route.dart';
+import 'package:admin/shared/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -95,20 +96,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
       ),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
-              _BrightnessButton(
-                handleBrightnessChange: () {},
-              ),
+              const _BrightnessButton(),
             ]
           : [Container()],
     );
   }
 
-  Widget _trailingActions() => Column(
+  Widget _trailingActions() => const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Flexible(
             child: _BrightnessButton(
-              handleBrightnessChange: () {},
               showTooltipBelow: false,
             ),
           ),
@@ -173,17 +171,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
   }
 }
 
-class _BrightnessButton extends StatelessWidget {
+class _BrightnessButton extends ConsumerWidget {
   const _BrightnessButton({
-    required this.handleBrightnessChange,
     this.showTooltipBelow = true,
   });
 
-  final Function handleBrightnessChange;
   final bool showTooltipBelow;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isBright = Theme.of(context).brightness == Brightness.light;
     return Tooltip(
       preferBelow: showTooltipBelow,
@@ -192,7 +188,9 @@ class _BrightnessButton extends StatelessWidget {
         icon: isBright
             ? const Icon(Icons.dark_mode_outlined)
             : const Icon(Icons.light_mode_outlined),
-        onPressed: () => handleBrightnessChange(!isBright),
+        onPressed: () {
+          ref.read(appThemeProvider.notifier).toggleTheme();
+        },
       ),
     );
   }

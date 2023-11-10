@@ -1,5 +1,6 @@
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/extension/list_extension.dart';
+import 'package:admin/shared/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,11 +13,14 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = AppRouter(ref: ref);
+    final themeMode = ref.watch(appThemeProvider);
     return MaterialApp.router(
       title: 'Admin',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(useMaterial3: true),
+      themeMode: themeMode,
+      theme: AppThemeData.lightTheme,
+      darkTheme: AppThemeData.darkTheme,
       routerConfig: appRouter.config(deepLinkBuilder: (deepLink) {
         // Check if path in routes or not
         final route = appRouter.routes.firstWhereOrNull(
