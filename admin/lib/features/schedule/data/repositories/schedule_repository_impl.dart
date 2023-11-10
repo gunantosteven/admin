@@ -16,7 +16,8 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
   }
 
   @override
-  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule() {
-    return dataSource.streamSchedule();
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
+      {required int limit}) {
+    return dataSource.streamSchedule(limit: limit);
   }
 }

@@ -14,5 +14,6 @@
   "somethingWrong": "Something Wrong",
   "newScheduleAdded": "New Schedule Added",
   "scheduleUpdated": "Schedule Updated",
-  "anonymousLogin": "Login as anonymous"
+  "anonymousLogin": "Login as anonymous",
+  "loadMore": "Load More"
 }

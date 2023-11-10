@@ -7,7 +7,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> addSchedule(
       {required ScheduleModel scheduleModel});
-  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule();
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
+      {required int limit});
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
@@ -41,14 +42,14 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   }
 
   @override
-  Future<Either<AppException, Stream<List<ScheduleModel>>>>
-      streamSchedule() async {
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
+      {required int limit}) async {
     try {
       final stream = supabaseClient
           .from(tableName)
           .stream(primaryKey: [ScheduleModel.idKey])
           .order(ScheduleModel.createdAtKey, ascending: false)
-          .limit(20)
+          .limit(limit)
           .map((event) {
             var list = <ScheduleModel>[];
             for (final item in event) {
