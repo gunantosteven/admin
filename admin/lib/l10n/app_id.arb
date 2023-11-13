@@ -15,5 +15,7 @@
     "newScheduleAdded": "Jadwal Baru Ditambahkan",
     "scheduleUpdated": "Jadwal Berhasil Diubah",
     "anonymousLogin": "Masuk sebagai anonim",
-    "loadMore": "Muat Lebih"
+    "loadMore": "Muat Lebih",
+    "deleteScheduleTitle": "Hapus Jadwal",
+  "deleteScheduleDesc": "Apakah anda yakin untuk menghapus jadwal ini?"
 }

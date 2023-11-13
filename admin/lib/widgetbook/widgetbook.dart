@@ -48,6 +48,7 @@ Widget _container({required child}) {
 Widget customButtonUseCase(BuildContext context) {
   return _container(
     child: CustomButton(
+      buttonType: ButtonType.DEFAULT,
       text: context.knobs.string(
         label: 'Title Button',
         initialValue: 'Custom Button',

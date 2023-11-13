@@ -15,5 +15,7 @@
   "newScheduleAdded": "New Schedule Added",
   "scheduleUpdated": "Schedule Updated",
   "anonymousLogin": "Login as anonymous",
-  "loadMore": "Load More"
+  "loadMore": "Load More",
+  "deleteScheduleTitle": "Delete Schedule",
+  "deleteScheduleDesc": "Are you sure to remove this schedule?"
 }

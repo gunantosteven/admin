@@ -30,6 +30,7 @@ class FormSchedule extends ConsumerWidget {
           ),
           AppSpacer.height24,
           CustomButton(
+            buttonType: ButtonType.DEFAULT,
             text: AppLocalizations.of(context)!.save,
             onPressed: () async {
               ref

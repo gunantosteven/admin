@@ -4,6 +4,7 @@ import 'package:admin/shared/extension/date_extension.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
+import 'package:admin/shared/widgets/custom_dialog.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,24 @@ class CustomListSchedule extends ConsumerWidget {
                             ''),
                         onTap: () => AutoRouter.of(context).push(
                           UpdateScheduleRoute(scheduleModel: scheduleModel),
+                        ),
+                        trailing: CustomButton(
+                          text: 'Delete',
+                          onPressed: () {
+                            showDialog<void>(
+                              context: context,
+                              builder: (context) => CustomDialog(
+                                title: AppLocalizations.of(context)!
+                                    .deleteScheduleTitle,
+                                desc: AppLocalizations.of(context)!
+                                    .deleteScheduleDesc,
+                                dialogType: DialogType.REMOVE,
+                                onConfirm: () {},
+                              ),
+                            );
+                          },
+                          buttonType: ButtonType.ICON,
+                          icon: Icons.delete,
                         ),
                       );
                     },

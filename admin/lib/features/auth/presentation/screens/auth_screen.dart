@@ -84,6 +84,7 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
                 AppSpacer.height24,
                 CustomButton(
                   text: AppLocalizations.of(context)!.login,
+                  buttonType: ButtonType.DEFAULT,
                   onPressed: () async {
                     ref.read(authControllerProvider.notifier).signInWithOtp(
                           email: emailController.text,
@@ -92,6 +93,7 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
                 ),
                 AppSpacer.height24,
                 CustomButton(
+                  buttonType: ButtonType.DEFAULT,
                   text: AppLocalizations.of(context)!.anonymousLogin,
                   onPressed: () async {
                     // For Demo Purpose Only
