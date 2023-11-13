@@ -20,4 +20,10 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
       {required int limit}) {
     return dataSource.streamSchedule(limit: limit);
   }
+
+  @override
+  Future<Either<AppException, bool>> deleteSchedule(
+      {required ScheduleModel scheduleModel}) {
+    return dataSource.deleteSchedule(scheduleModel: scheduleModel);
+  }
 }

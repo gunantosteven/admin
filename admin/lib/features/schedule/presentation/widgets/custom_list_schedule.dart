@@ -1,3 +1,4 @@
+import 'package:admin/features/schedule/application/delete_schedule_controller.dart';
 import 'package:admin/features/schedule/application/list_schedule_controller.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/extension/date_extension.dart';
@@ -22,7 +23,7 @@ class CustomListSchedule extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final schedules = ref.watch(listScheduleControllerProvider);
-    final notifier = ref.read(listScheduleControllerProvider.notifier);
+    final listNotifier = ref.read(listScheduleControllerProvider.notifier);
     return schedules.when(
       data: (stream) => StreamBuilder(
         stream: stream,
@@ -63,7 +64,13 @@ class CustomListSchedule extends ConsumerWidget {
                                 desc: AppLocalizations.of(context)!
                                     .deleteScheduleDesc,
                                 dialogType: DialogType.REMOVE,
-                                onConfirm: () {},
+                                onConfirm: () {
+                                  ref
+                                      .read(deleteScheduleControllerProvider
+                                          .notifier)
+                                      .deleteSchedule(
+                                          scheduleModel: scheduleModel);
+                                },
                               ),
                             );
                           },
@@ -73,14 +80,14 @@ class CustomListSchedule extends ConsumerWidget {
                       );
                     },
                   ),
-                  if (notifier.canLoadMore(list.length))
+                  if (listNotifier.canLoadMore(list.length))
                     Padding(
                       padding: AppPadding.all24,
                       child: CustomButton(
                         text: AppLocalizations.of(context)!.loadMore,
                         buttonType: ButtonType.TEXT,
                         onPressed: () {
-                          notifier.loadMore();
+                          listNotifier.loadMore();
                         },
                       ),
                     ),

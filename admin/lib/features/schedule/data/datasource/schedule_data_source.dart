@@ -9,6 +9,8 @@ abstract class ScheduleDataSource {
       {required ScheduleModel scheduleModel});
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
       {required int limit});
+  Future<Either<AppException, bool>> deleteSchedule(
+      {required ScheduleModel scheduleModel});
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
@@ -64,6 +66,38 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
           message: 'Unknown error occured',
           statusCode: 1,
           identifier: '${e.toString()}ScheduleDataSource.addSchedule',
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppException, bool>> deleteSchedule(
+      {required ScheduleModel scheduleModel}) async {
+    try {
+      final data = await supabaseClient
+          .from(tableName)
+          .select()
+          .eq(ScheduleModel.idKey, scheduleModel.id);
+      if (data is List<dynamic> && data.isEmpty) {
+        return Left(
+          AppException(
+            message: 'Schedule not found!',
+            statusCode: 1,
+            identifier: 'SCHEDULENOTFOUNDScheduleDataSource.deleteSchedule',
+          ),
+        );
+      }
+      await supabaseClient.from(tableName).delete().match(
+        {ScheduleModel.idKey: scheduleModel.id},
+      );
+      return const Right(true);
+    } catch (e) {
+      return Left(
+        AppException(
+          message: 'Unknown error occured',
+          statusCode: 1,
+          identifier: '${e.toString()}ScheduleDataSource.deleteSchedule',
         ),
       );
     }

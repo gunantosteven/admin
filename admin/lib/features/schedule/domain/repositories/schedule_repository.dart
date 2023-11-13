@@ -7,4 +7,6 @@ abstract class ScheduleRepository {
       {required ScheduleModel scheduleModel});
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
       {required int limit});
+  Future<Either<AppException, bool>> deleteSchedule(
+      {required ScheduleModel scheduleModel});
 }
