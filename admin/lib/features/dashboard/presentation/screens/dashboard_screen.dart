@@ -180,7 +180,7 @@ class _BrightnessButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isBright = Theme.of(context).brightness == Brightness.light;
+    final isBright = ref.read(appThemeProvider) == ThemeMode.light;
     return Tooltip(
       preferBelow: showTooltipBelow,
       message: 'Toggle brightness',
@@ -196,11 +196,11 @@ class _BrightnessButton extends ConsumerWidget {
   }
 }
 
-class _ExpandedTrailingActions extends StatelessWidget {
+class _ExpandedTrailingActions extends ConsumerWidget {
   const _ExpandedTrailingActions();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenHeight = MediaQuery.of(context).size.height;
     final trailingActionsBody = Container(
       constraints: const BoxConstraints.tightFor(width: 250),
@@ -214,10 +214,11 @@ class _ExpandedTrailingActions extends StatelessWidget {
               const Text('Brightness'),
               Expanded(child: Container()),
               Switch(
-                  value: true,
-                  onChanged: (value) {
-                    // handleBrightnessChange(value);
-                  })
+                value: ref.read(appThemeProvider) == ThemeMode.light,
+                onChanged: (value) {
+                  ref.read(appThemeProvider.notifier).toggleTheme();
+                },
+              )
             ],
           ),
         ],
