@@ -17,5 +17,7 @@
   "anonymousLogin": "Login as anonymous",
   "loadMore": "Load More",
   "deleteScheduleTitle": "Delete Schedule",
-  "deleteScheduleDesc": "Are you sure to remove this schedule?"
+  "deleteScheduleDesc": "Are you sure to remove this schedule?",
+  "scheduleEmpty": "Schedule is empty",
+  "delete": "Delete"
 }

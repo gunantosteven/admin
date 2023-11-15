@@ -7,6 +7,7 @@ import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_dialog.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
+import 'package:admin/shared/widgets/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,8 +37,11 @@ class CustomListSchedule extends ConsumerWidget {
           final list = snapshot.data;
           if (list != null) {
             if (list.isEmpty) {
-              return const Center(
-                child: Text('Schedule is empty'),
+              return Center(
+                child: CustomText(
+                  AppLocalizations.of(context)!.scheduleEmpty,
+                  textType: TextType.BODY,
+                ),
               );
             }
 
@@ -60,7 +64,7 @@ class CustomListSchedule extends ConsumerWidget {
                           UpdateScheduleRoute(scheduleModel: scheduleModel),
                         ),
                         trailing: CustomButton(
-                          text: 'Delete',
+                          text: AppLocalizations.of(context)!.delete,
                           onPressed: () {
                             showDialog<void>(
                               context: context,

@@ -17,5 +17,7 @@
     "anonymousLogin": "Masuk sebagai anonim",
     "loadMore": "Muat Lebih",
     "deleteScheduleTitle": "Hapus Jadwal",
-  "deleteScheduleDesc": "Apakah anda yakin untuk menghapus jadwal ini?"
+    "deleteScheduleDesc": "Apakah anda yakin untuk menghapus jadwal ini?",
+    "scheduleEmpty": "Tidak ada jadwal",
+    "delete": "Hapus"
 }
