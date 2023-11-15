@@ -3,6 +3,7 @@ import 'package:admin/features/schedule/domain/model/schedule_model.dart';
 import 'package:admin/features/schedule/presentation/widgets/form_schedule.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_snackbar.dart';
+import 'package:admin/shared/widgets/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -62,8 +63,10 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(AppLocalizations.of(context)!.updateSchedule),
+        title: CustomText(
+          AppLocalizations.of(context)!.updateSchedule,
+          textType: TextType.H1,
+        ),
       ),
       body: Stack(
         children: [
