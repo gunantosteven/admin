@@ -19,7 +19,7 @@ class NewScheduleScreen extends ConsumerStatefulWidget {
 }
 
 class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
-  final TextEditingController _jobController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
       body: Stack(
         children: [
           FormSchedule(
-            jobController: _jobController,
+            titleController: _titleController,
           ),
           Consumer(
             builder: (context, ref, child) {

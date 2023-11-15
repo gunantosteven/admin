@@ -1,6 +1,7 @@
 import 'package:admin/shared/domain/models/response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 class AppException implements Exception {
   final String? message;
@@ -11,7 +12,11 @@ class AppException implements Exception {
     required this.message,
     required this.statusCode,
     required this.identifier,
-  });
+  }) {
+    if (kDebugMode) {
+      debugPrint(toString());
+    }
+  }
 
   @override
   String toString() {

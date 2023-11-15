@@ -35,6 +35,12 @@ class CustomListSchedule extends ConsumerWidget {
 
           final list = snapshot.data;
           if (list != null) {
+            if (list.isEmpty) {
+              return const Center(
+                child: Text('Schedule is empty'),
+              );
+            }
+
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -46,7 +52,7 @@ class CustomListSchedule extends ConsumerWidget {
                       final scheduleModel = list[index];
                       return ListTile(
                         key: Key(index.toString()),
-                        title: Text(scheduleModel.job),
+                        title: Text(scheduleModel.title),
                         subtitle: Text(scheduleModel.createdAt
                                 ?.string(DateType.simpleDateTime) ??
                             ''),

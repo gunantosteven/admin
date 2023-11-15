@@ -12,11 +12,11 @@ class NewScheduleController extends _$NewScheduleController {
     return null;
   }
 
-  Future<void> addSchedule({required String job}) async {
+  Future<void> addSchedule({required String title}) async {
     state = const AsyncLoading();
     final res = await ref
         .read(scheduleRepositoryProvider)
-        .addSchedule(scheduleModel: ScheduleModel(job: job));
+        .addSchedule(scheduleModel: ScheduleModel(title: title));
     state = res.fold(
         (l) => AsyncValue.error(l.message ?? '', StackTrace.current),
         AsyncValue.data);

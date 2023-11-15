@@ -27,7 +27,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       await supabaseClient.from(tableName).insert(
         {
           ScheduleModel.idKey: generateNewUuid,
-          ScheduleModel.jobKey: scheduleModel.job,
+          ScheduleModel.titleKey: scheduleModel.title,
           ScheduleModel.createdAtKey: DateTime.now().toString(),
         },
       );

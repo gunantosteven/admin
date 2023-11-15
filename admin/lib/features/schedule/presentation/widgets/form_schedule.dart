@@ -11,12 +11,12 @@ class FormSchedule extends ConsumerWidget {
   const FormSchedule({
     super.key,
     this.padding = AppPadding.all24,
-    required this.jobController,
+    required this.titleController,
   });
 
   final EdgeInsetsGeometry padding;
 
-  final TextEditingController jobController;
+  final TextEditingController titleController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,8 +25,8 @@ class FormSchedule extends ConsumerWidget {
       child: Column(
         children: [
           CustomTextField(
-            controller: jobController,
-            placeholder: AppLocalizations.of(context)!.job,
+            controller: titleController,
+            placeholder: AppLocalizations.of(context)!.title,
           ),
           AppSpacer.height24,
           CustomButton(
@@ -35,7 +35,7 @@ class FormSchedule extends ConsumerWidget {
             onPressed: () async {
               ref
                   .read(newScheduleControllerProvider.notifier)
-                  .addSchedule(job: jobController.text);
+                  .addSchedule(title: titleController.text);
             },
           ),
         ],

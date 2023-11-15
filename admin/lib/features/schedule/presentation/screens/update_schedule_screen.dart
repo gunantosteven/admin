@@ -22,13 +22,13 @@ class UpdateScheduleScreen extends ConsumerStatefulWidget {
 }
 
 class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
-  final TextEditingController _jobController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    _jobController.text = widget.scheduleModel.job;
+    _titleController.text = widget.scheduleModel.title;
   }
 
   @override
@@ -68,7 +68,7 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
       body: Stack(
         children: [
           FormSchedule(
-            jobController: _jobController,
+            titleController: _titleController,
           ),
           Consumer(
             builder: (context, ref, child) {
