@@ -10,15 +10,21 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
   ScheduleRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<AppException, ScheduleModel>> addSchedule(
-      {required ScheduleModel scheduleModel}) {
-    return dataSource.addSchedule(scheduleModel: scheduleModel);
-  }
-
-  @override
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
       {required int limit}) {
     return dataSource.streamSchedule(limit: limit);
+  }
+
+  @override
+  Future<Either<AppException, ScheduleModel>> createSchedule(
+      {required ScheduleModel scheduleModel}) {
+    return dataSource.createSchedule(scheduleModel: scheduleModel);
+  }
+
+  @override
+  Future<Either<AppException, ScheduleModel>> updateSchedule(
+      {required ScheduleModel scheduleModel}) {
+    return dataSource.updateSchedule(scheduleModel: scheduleModel);
   }
 
   @override

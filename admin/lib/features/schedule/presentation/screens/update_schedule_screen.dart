@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/application/new_schedule_controller.dart';
+import 'package:admin/features/schedule/application/update_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/model/schedule_model.dart';
 import 'package:admin/features/schedule/presentation/widgets/form_schedule.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
@@ -38,7 +38,7 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<ScheduleModel?>>(newScheduleControllerProvider,
+    ref.listen<AsyncValue<ScheduleModel?>>(updateScheduleControllerProvider,
         (previous, next) {
       next.when(
           data: (data) {
@@ -69,10 +69,18 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
         children: [
           FormSchedule(
             titleController: _titleController,
+            onConfirm: () {
+              ref
+                  .read(updateScheduleControllerProvider.notifier)
+                  .updateSchedule(
+                    currentSchedule: widget.scheduleModel,
+                    newTitle: _titleController.text,
+                  );
+            },
           ),
           Consumer(
             builder: (context, ref, child) {
-              final state = ref.watch(newScheduleControllerProvider);
+              final state = ref.watch(updateScheduleControllerProvider);
 
               return state.maybeWhen(
                   loading: () => const CustomLoading(),

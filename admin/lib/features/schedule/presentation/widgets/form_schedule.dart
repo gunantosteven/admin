@@ -1,4 +1,3 @@
-import 'package:admin/features/schedule/application/new_schedule_controller.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
@@ -12,11 +11,14 @@ class FormSchedule extends ConsumerWidget {
     super.key,
     this.padding = AppPadding.all24,
     required this.titleController,
+    required this.onConfirm,
   });
 
   final EdgeInsetsGeometry padding;
 
   final TextEditingController titleController;
+
+  final Function()? onConfirm;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,11 +34,7 @@ class FormSchedule extends ConsumerWidget {
           CustomButton(
             buttonType: ButtonType.DEFAULT,
             text: AppLocalizations.of(context)!.save,
-            onPressed: () async {
-              ref
-                  .read(newScheduleControllerProvider.notifier)
-                  .addSchedule(title: titleController.text);
-            },
+            onPressed: onConfirm,
           ),
         ],
       ),

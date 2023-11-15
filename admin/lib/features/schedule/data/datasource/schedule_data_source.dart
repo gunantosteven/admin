@@ -5,10 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class ScheduleDataSource {
-  Future<Either<AppException, ScheduleModel>> addSchedule(
-      {required ScheduleModel scheduleModel});
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
       {required int limit});
+  Future<Either<AppException, ScheduleModel>> createSchedule(
+      {required ScheduleModel scheduleModel});
+  Future<Either<AppException, ScheduleModel>> updateSchedule(
+      {required ScheduleModel scheduleModel});
   Future<Either<AppException, bool>> deleteSchedule(
       {required ScheduleModel scheduleModel});
 }
@@ -21,7 +23,35 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   ScheduleSupabaseDataSource(this.supabaseClient);
 
   @override
-  Future<Either<AppException, ScheduleModel>> addSchedule(
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
+      {required int limit}) async {
+    try {
+      final stream = supabaseClient
+          .from(tableName)
+          .stream(primaryKey: [ScheduleModel.idKey])
+          .order(ScheduleModel.createdAtKey, ascending: false)
+          .limit(limit)
+          .map((event) {
+            var list = <ScheduleModel>[];
+            for (final item in event) {
+              list.add(ScheduleModel.fromJson(item));
+            }
+            return list;
+          });
+      return Right(stream);
+    } catch (e) {
+      return Left(
+        AppException(
+          message: 'Unknown error occured',
+          statusCode: 1,
+          identifier: '${e.toString()}ScheduleDataSource.addSchedule',
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppException, ScheduleModel>> createSchedule(
       {required ScheduleModel scheduleModel}) async {
     try {
       await supabaseClient.from(tableName).insert(
@@ -44,22 +74,17 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   }
 
   @override
-  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit}) async {
+  Future<Either<AppException, ScheduleModel>> updateSchedule(
+      {required ScheduleModel scheduleModel}) async {
     try {
-      final stream = supabaseClient
-          .from(tableName)
-          .stream(primaryKey: [ScheduleModel.idKey])
-          .order(ScheduleModel.createdAtKey, ascending: false)
-          .limit(limit)
-          .map((event) {
-            var list = <ScheduleModel>[];
-            for (final item in event) {
-              list.add(ScheduleModel.fromJson(item));
-            }
-            return list;
-          });
-      return Right(stream);
+      await supabaseClient.from(tableName).update(
+        {
+          ScheduleModel.titleKey: scheduleModel.title,
+        },
+      ).match(
+        {ScheduleModel.idKey: scheduleModel.id},
+      );
+      return Right(scheduleModel.copyWith.call(id: generateNewUuid));
     } catch (e) {
       return Left(
         AppException(

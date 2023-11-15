@@ -64,6 +64,11 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
         children: [
           FormSchedule(
             titleController: _titleController,
+            onConfirm: () {
+              ref
+                  .read(newScheduleControllerProvider.notifier)
+                  .createSchedule(title: _titleController.text);
+            },
           ),
           Consumer(
             builder: (context, ref, child) {
