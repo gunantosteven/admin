@@ -1,10 +1,12 @@
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/theme/app_theme.dart';
+import 'package:admin/shared/widgets/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class DashboardScreen extends ConsumerStatefulWidget {
@@ -81,7 +83,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: const Text('Admin App'),
+      title: CustomText(
+        AppLocalizations.of(context)!.admin,
+        textType: TextType.H1,
+      ),
       leading: IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {

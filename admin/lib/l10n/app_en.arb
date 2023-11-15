@@ -1,4 +1,5 @@
 {
+  "admin": "Admin",
   "schedule": "Schedule",
   "newSchedule": "New Schedule",
   "updateSchedule": "Update Schedule",

@@ -4,6 +4,7 @@ import 'package:admin/features/schedule/presentation/widgets/custom_list_schedul
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_snackbar.dart';
+import 'package:admin/shared/widgets/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -48,7 +49,10 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.schedule),
+        title: CustomText(
+          AppLocalizations.of(context)!.schedule,
+          textType: TextType.H4,
+        ),
       ),
       body: Stack(
         children: [

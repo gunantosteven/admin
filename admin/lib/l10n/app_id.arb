@@ -1,4 +1,5 @@
 {
+    "admin": "Admin",
     "schedule": "Jadwal",
     "newSchedule": "Jadwal Baru",
     "updateSchedule": "Ubah Jadwal",
