@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: controller != null && controller!.text.isEmpty
                 ? null
                 : Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
+                    padding: AppPadding.right8,
                     child: IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: () {
