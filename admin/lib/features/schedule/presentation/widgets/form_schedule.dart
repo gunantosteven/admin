@@ -27,6 +27,7 @@ class FormSchedule extends ConsumerWidget {
       child: Column(
         children: [
           CustomTextField(
+            textFieldType: TextFieldType.DEFAULT,
             controller: titleController,
             placeholder: AppLocalizations.of(context)!.title,
           ),

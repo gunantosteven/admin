@@ -75,6 +75,7 @@ Widget customTextFieldUseCase(BuildContext context) {
   return _container(
     child: CustomTextField(
       controller: controller,
+      textFieldType: TextFieldType.DEFAULT,
     ),
   );
 }

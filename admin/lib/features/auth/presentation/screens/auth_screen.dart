@@ -78,6 +78,7 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
             child: Column(
               children: [
                 CustomTextField(
+                  textFieldType: TextFieldType.DEFAULT,
                   controller: emailController,
                   placeholder: AppLocalizations.of(context)!.email,
                 ),

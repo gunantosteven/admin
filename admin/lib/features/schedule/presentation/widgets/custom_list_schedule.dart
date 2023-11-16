@@ -8,6 +8,7 @@ import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_dialog.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_text.dart';
+import 'package:admin/shared/widgets/custom_textfield.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,6 +49,10 @@ class CustomListSchedule extends ConsumerWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  const CustomTextField(
+                    textFieldType: TextFieldType.SEARCH,
+                    placeholder: 'Search Schedule',
+                  ),
                   ListView.builder(
                     itemCount: list.length,
                     padding: padding,
