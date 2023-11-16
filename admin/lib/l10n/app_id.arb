@@ -1,6 +1,15 @@
 {
     "admin": "Admin",
     "schedule": "Jadwal",
+    "@schedule": {
+        "description": "Schedule title",
+        "placeholders": {
+            "mode": {
+                "type": "String",
+                "example": "RealTime"
+            }
+        }
+    },
     "newSchedule": "Jadwal Baru",
     "updateSchedule": "Ubah Jadwal",
     "save": "Simpan",
@@ -19,6 +28,7 @@
     "loadMore": "Muat Lebih",
     "deleteScheduleTitle": "Hapus Jadwal",
     "deleteScheduleDesc": "Apakah anda yakin untuk menghapus jadwal ini?",
-    "scheduleEmpty": "Tidak ada jadwal",
-    "delete": "Hapus"
+    "scheduleEmpty": "Tidak ada jadwal ditemukan",
+    "delete": "Hapus",
+    "searchSchedule": "Cari Jadwal"
 }

@@ -10,12 +10,6 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
   ScheduleRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit}) {
-    return dataSource.streamSchedule(limit: limit);
-  }
-
-  @override
   Future<Either<AppException, ScheduleModel>> createSchedule(
       {required ScheduleModel scheduleModel}) {
     return dataSource.createSchedule(scheduleModel: scheduleModel);
@@ -31,5 +25,17 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
   Future<Either<AppException, bool>> deleteSchedule(
       {required ScheduleModel scheduleModel}) {
     return dataSource.deleteSchedule(scheduleModel: scheduleModel);
+  }
+
+  @override
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
+      {required int limit}) {
+    return dataSource.streamSchedule(limit: limit);
+  }
+
+  @override
+  Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
+      {required int limit, required String title}) {
+    return dataSource.searchSchedule(limit: limit, title: title);
   }
 }

@@ -5,14 +5,16 @@ import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class ScheduleDataSource {
-  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit});
   Future<Either<AppException, ScheduleModel>> createSchedule(
       {required ScheduleModel scheduleModel});
   Future<Either<AppException, ScheduleModel>> updateSchedule(
       {required ScheduleModel scheduleModel});
   Future<Either<AppException, bool>> deleteSchedule(
       {required ScheduleModel scheduleModel});
+  Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
+      {required int limit});
+  Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
+      {required int limit, required String title});
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
@@ -123,6 +125,35 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
           message: 'Unknown error occured',
           statusCode: 1,
           identifier: '${e.toString()}ScheduleDataSource.deleteSchedule',
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
+      {required int limit, required String title}) async {
+    try {
+      final search = supabaseClient
+          .from(tableName)
+          .select()
+          .ilike(ScheduleModel.titleKey, '%$title%')
+          .order(ScheduleModel.createdAtKey, ascending: false)
+          .limit(limit)
+          .then((event) {
+        var list = <ScheduleModel>[];
+        for (final item in event) {
+          list.add(ScheduleModel.fromJson(item));
+        }
+        return list;
+      });
+      return Right(search);
+    } catch (e) {
+      return Left(
+        AppException(
+          message: 'Unknown error occured',
+          statusCode: 1,
+          identifier: '${e.toString()}ScheduleDataSource.addSchedule',
         ),
       );
     }

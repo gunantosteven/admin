@@ -9,11 +9,14 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.controller,
     this.placeholder,
+    this.onChanged,
     required this.textFieldType,
   });
 
   final TextEditingController? controller;
   final String? placeholder;
+  final ValueChanged<String>? onChanged;
+
   final TextFieldType textFieldType;
 
   @override
@@ -23,6 +26,7 @@ class CustomTextField extends StatelessWidget {
         return TextField(
           key: key,
           controller: controller,
+          onChanged: onChanged,
           decoration: InputDecoration(
             hintText: placeholder,
             contentPadding: AppPadding.horizontal24,

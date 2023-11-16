@@ -1,3 +1,4 @@
+import 'package:admin/features/schedule/application/search_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/model/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,5 +21,8 @@ class DeleteScheduleController extends _$DeleteScheduleController {
     state = res.fold(
         (l) => AsyncValue.error(l.message ?? '', StackTrace.current),
         AsyncValue.data);
+
+    // required to reload if search mode
+    ref.read(searchScheduleControllerProvider.notifier).reload();
   }
 }

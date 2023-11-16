@@ -1,6 +1,15 @@
 {
   "admin": "Admin",
-  "schedule": "Schedule",
+  "schedule": "Schedule {mode}",
+  "@schedule": {
+    "description": "Schedule title",
+    "placeholders": {
+      "mode": {
+        "type": "String",
+        "example": "RealTime"
+      }
+    }
+  },
   "newSchedule": "New Schedule",
   "updateSchedule": "Update Schedule",
   "save": "Save",
@@ -19,6 +28,7 @@
   "loadMore": "Load More",
   "deleteScheduleTitle": "Delete Schedule",
   "deleteScheduleDesc": "Are you sure to remove this schedule?",
-  "scheduleEmpty": "Schedule is empty",
-  "delete": "Delete"
+  "scheduleEmpty": "No Schedule Found",
+  "delete": "Delete",
+  "searchSchedule": "Search Schedule"
 }

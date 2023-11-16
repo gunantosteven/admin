@@ -1,5 +1,6 @@
 import 'package:admin/features/schedule/application/delete_schedule_controller.dart';
 import 'package:admin/features/schedule/application/list_schedule_controller.dart';
+import 'package:admin/features/schedule/application/search_schedule_controller.dart';
 import 'package:admin/features/schedule/presentation/widgets/custom_list_schedule.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
@@ -25,6 +26,9 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   Widget build(BuildContext context) {
     final schedulesRef = ref.watch(listScheduleControllerProvider);
     final deleteScheduleRef = ref.watch(deleteScheduleControllerProvider);
+    // ignore: unused_local_variable
+    final searchSchedules = ref.watch(searchScheduleControllerProvider);
+    final searchNotifier = ref.read(searchScheduleControllerProvider.notifier);
 
     ref.listen<AsyncValue<bool>>(deleteScheduleControllerProvider,
         (previous, next) {
@@ -50,7 +54,9 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
-          AppLocalizations.of(context)!.schedule,
+          AppLocalizations.of(context)!.schedule(searchNotifier.isSearchMode()
+              ? '(Not Realtime Stream)'
+              : '(Realtime Stream)'),
           textType: TextType.H4,
         ),
       ),
