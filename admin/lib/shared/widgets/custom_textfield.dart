@@ -1,3 +1,4 @@
+import 'package:admin/shared/theme/app_color.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,26 @@ class CustomTextField extends StatelessWidget {
           key: key,
           controller: controller,
           onChanged: onChanged,
+          maxLines: 1,
+          textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             hintText: placeholder,
-            contentPadding: AppPadding.horizontal24,
+            contentPadding: AppPadding.all16,
+            isDense: true,
+            suffixIcon: controller != null && controller!.text.isEmpty
+                ? null
+                : Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        controller?.clear();
+                        if (onChanged != null) {
+                          onChanged!('');
+                        }
+                      },
+                    ),
+                  ),
           ),
         );
       default:
