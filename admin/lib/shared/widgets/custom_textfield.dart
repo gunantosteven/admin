@@ -1,4 +1,3 @@
-import 'package:admin/shared/theme/app_color.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:flutter/material.dart';
 
