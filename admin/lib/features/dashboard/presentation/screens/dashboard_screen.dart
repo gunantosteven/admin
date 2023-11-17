@@ -1,6 +1,9 @@
+import 'package:admin/features/dashboard/application/expand_navigation_controller.dart';
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
 import 'package:admin/routes/app_route.dart';
+import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_theme.dart';
+import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -110,11 +113,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
   Widget _trailingActions() => const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Flexible(
-            child: _BrightnessButton(
-              showTooltipBelow: false,
-            ),
+          _BrightnessButton(
+            showTooltipBelow: false,
           ),
+          _ExpandButton(),
         ],
       );
 
@@ -132,6 +134,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
           ],
           builder: (ctx, child) {
             final tabsRouter = AutoTabsRouter.of(ctx);
+            final extended = ref.watch(expandNavigationControllerProvider);
 
             screenIndex = tabsRouter.activeIndex;
 
@@ -148,7 +151,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                         BoxConstraints(minHeight: constraint.maxHeight),
                     child: IntrinsicHeight(
                       child: NavigationRail(
-                        extended: showLargeSizeLayout,
+                        extended: extended,
                         destinations: navRailDestinations,
                         selectedIndex: screenIndex,
                         onDestinationSelected: (index) {
@@ -158,7 +161,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
                         trailing: Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 20),
-                            child: showLargeSizeLayout
+                            child: extended
                                 ? const _ExpandedTrailingActions()
                                 : _trailingActions(),
                           ),
@@ -189,10 +192,9 @@ class _BrightnessButton extends ConsumerWidget {
     return Tooltip(
       preferBelow: showTooltipBelow,
       message: 'Toggle brightness',
-      child: IconButton(
-        icon: isBright
-            ? const Icon(Icons.dark_mode_outlined)
-            : const Icon(Icons.light_mode_outlined),
+      child: CustomButton(
+        buttonType: ButtonType.ICON,
+        icon: isBright ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
         onPressed: () {
           ref.read(appThemeProvider.notifier).toggleTheme();
         },
@@ -223,7 +225,17 @@ class _ExpandedTrailingActions extends ConsumerWidget {
                 onChanged: (value) {
                   ref.read(appThemeProvider.notifier).toggleTheme();
                 },
-              )
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const Text('Shrink Tab'),
+              Expanded(child: Container()),
+              const Padding(
+                padding: AppPadding.right8,
+                child: _ExpandButton(),
+              ),
             ],
           ),
         ],
@@ -232,5 +244,21 @@ class _ExpandedTrailingActions extends ConsumerWidget {
     return screenHeight > 740
         ? trailingActionsBody
         : SingleChildScrollView(child: trailingActionsBody);
+  }
+}
+
+class _ExpandButton extends ConsumerWidget {
+  const _ExpandButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isExpand = ref.watch(expandNavigationControllerProvider);
+    return CustomButton(
+      buttonType: ButtonType.ICON,
+      icon: isExpand ? Icons.arrow_back : Icons.arrow_forward,
+      onPressed: () {
+        ref.read(expandNavigationControllerProvider.notifier).expand();
+      },
+    );
   }
 }

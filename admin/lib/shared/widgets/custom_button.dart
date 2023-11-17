@@ -6,13 +6,13 @@ enum ButtonType { DEFAULT, TEXT, ICON }
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.text,
     required this.onPressed,
-    this.icon = Icons.abc,
     required this.buttonType,
+    this.text,
+    this.icon = Icons.abc,
   });
 
-  final String text;
+  final String? text;
   final Function()? onPressed;
   final ButtonType buttonType;
   final IconData? icon;
@@ -23,7 +23,7 @@ class CustomButton extends StatelessWidget {
       case ButtonType.TEXT:
         return TextButton(
           onPressed: onPressed,
-          child: Text(text),
+          child: Text(text ?? ''),
         );
       case ButtonType.ICON:
         return IconButton(
@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
       default:
         return ElevatedButton(
           onPressed: onPressed,
-          child: Text(text),
+          child: Text(text ?? ''),
         );
     }
   }
