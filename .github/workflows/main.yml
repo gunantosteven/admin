@@ -1,14 +1,14 @@
 name: Dart
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: admin
 
     steps:
       - uses: actions/checkout@v3
@@ -20,6 +20,4 @@ jobs:
         run: flutter pub run build_runner build --delete-conflicting-outputs
       
       - name: Run tests
-        run: flutter test --coverage
-        
-        working-directory: admin/
+        run: flutter test
