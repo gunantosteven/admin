@@ -4,7 +4,7 @@
 
 Flutter Stack:
 
-- Project Archtiecture : Clean Archticture
+- Project Architecture : Clean Architecture
 - Project Structure : Features Based
 - Database : Supabase
 - Auth : Supabase
