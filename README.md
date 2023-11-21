@@ -13,6 +13,8 @@ Features so far:
 - Read (Realtime or Not with Supabase)
 - Pagination
 - Search
+- Localization
+- Theme Dark or Light
 
 
 [Check the Project Stack](https://github.com/gunantosteven/admin/tree/main/admin#readme)
