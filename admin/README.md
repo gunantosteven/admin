@@ -11,7 +11,8 @@ Flutter Stack:
 - State Management : Riverpod with annotation
 - Route : auto_route
 - Design System: WidgetBook
-- With Unit Test: Yes
+- Localization : flutter_localizations
+- Unit Test: Mocktail
 
 ## How to run
 
