@@ -16,6 +16,12 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Write SUPABASE_URL to .env
+        run: echo 'SUPABASE_URL={{ secrets.SUPABASE_URL }}' > .env
+
+      - name: Write SUPABASE_ANON_KEY to .env
+        run: echo 'SUPABASE_ANON_KEY={{ secrets.SUPABASE_URL }}' > .env
+
       - name: Install dependencies
         run: flutter pub get
 
