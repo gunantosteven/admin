@@ -75,6 +75,9 @@ dependencies:
 
   # RFC4122 (v1, v4, v5, v6, v7, v8) UUID Generator and Parser for Dart
   uuid: ^4.0.0
+
+  # A Dart mock library which simplifies mocking with null safety support and no manual mocks or code generation.
+  mocktail: ^1.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
