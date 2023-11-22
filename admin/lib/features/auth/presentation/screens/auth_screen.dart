@@ -17,11 +17,14 @@ class AuthScreen extends ConsumerStatefulWidget {
 
   const AuthScreen({super.key});
 
+  // * Keys for testing using find.byKey()
+  static const loginButtonKey = Key('login-button');
+
   @override
-  ConsumerState<AuthScreen> createState() => _LoginScreenState();
+  ConsumerState<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _LoginScreenState extends ConsumerState<AuthScreen> {
+class _AuthScreenState extends ConsumerState<AuthScreen> {
   final TextEditingController emailController = TextEditingController();
 
   @override
@@ -84,6 +87,7 @@ class _LoginScreenState extends ConsumerState<AuthScreen> {
                 ),
                 AppSpacer.height24,
                 CustomButton(
+                  key: AuthScreen.loginButtonKey,
                   text: AppLocalizations.of(context)!.login,
                   buttonType: ButtonType.DEFAULT,
                   onPressed: () async {

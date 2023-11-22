@@ -17,9 +17,10 @@ part 'app_route.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends _$AppRouter implements AutoRouteGuard {
-  AppRouter({required this.ref});
+  AppRouter({required this.ref, this.isNoGuard = false});
 
   final WidgetRef ref;
+  final bool isNoGuard;
 
   @override
   RouteType get defaultRouteType =>
@@ -66,6 +67,11 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
+    if (isNoGuard) {
+      resolver.next(true);
+      return;
+    }
+
     final authenticated =
         ref.watch(supabaseAuthServiceProvider).currentSession != null;
 
