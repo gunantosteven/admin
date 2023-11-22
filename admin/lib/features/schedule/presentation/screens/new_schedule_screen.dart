@@ -1,5 +1,5 @@
 import 'package:admin/features/schedule/application/new_schedule_controller.dart';
-import 'package:admin/features/schedule/domain/model/schedule_model.dart';
+import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/presentation/widgets/form_schedule.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_snackbar.dart';

@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/domain/model/schedule_model.dart';
+import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/shared/exception/http_exception.dart';
 import 'package:admin/shared/utils/uuid.dart';
 import 'package:dartz/dartz.dart';

@@ -1,7 +1,7 @@
 import 'package:admin/features/schedule/application/delete_schedule_controller.dart';
 import 'package:admin/features/schedule/application/list_schedule_controller.dart';
 import 'package:admin/features/schedule/application/search_schedule_controller.dart';
-import 'package:admin/features/schedule/domain/model/schedule_model.dart';
+import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/extension/date_extension.dart';
 import 'package:admin/shared/theme/app_padding.dart';

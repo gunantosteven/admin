@@ -10,7 +10,7 @@ import 'package:admin/features/auth/presentation/screens/auth_screen.dart';
 import 'package:admin/shared/domain/providers/supabase_service_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:admin/features/schedule/domain/model/schedule_model.dart';
+import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:flutter/material.dart';
 
 part 'app_route.gr.dart';
