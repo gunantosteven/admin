@@ -1,20 +1,27 @@
 import 'package:admin/features/auth/data/datasource/auth_data_source.dart';
-import 'package:admin/shared/exception/http_exception.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../dummy_data.dart';
+import '../../../../mocks.dart';
 
 class MockAuthDataSource extends Mock implements AuthDataSource {}
 
 void main() {
-  late MockAuthDataSource mockAuthDataSource;
+  late AuthDataSource authDataSource;
+  late MockSupabaseService mockSupabaseService;
+  late MockSupabaseAuthService mockSupabaseAuthService;
   setUpAll(() {
-    mockAuthDataSource = MockAuthDataSource();
+    mockSupabaseService = MockSupabaseService();
+    mockSupabaseAuthService = MockSupabaseAuthService();
+    authDataSource = AuthSupabaseDataSource(
+      mockSupabaseService,
+      mockSupabaseAuthService,
+    );
   });
   group(
-    'Auth',
+    'AuthDataSource',
     () {
       const email = 'dummy';
       const pass = 'dummy';
@@ -23,13 +30,13 @@ void main() {
         'Sign Up returns bool on success',
         () async {
           when(
-            () => mockAuthDataSource.signUp(email: email, password: pass),
+            () => mockSupabaseAuthService.signUp(email: email, password: pass),
           ).thenAnswer(
-            (_) async => const Right<AppException, bool>(true),
+            (_) async => AuthResponse(),
           );
 
           final response =
-              await mockAuthDataSource.signUp(email: email, password: pass);
+              await authDataSource.signUp(email: email, password: pass);
 
           expect(response.isRight(), true);
         },
@@ -38,15 +45,12 @@ void main() {
       test(
         'Sign Up returns AppException on failure',
         () async {
-          when(() => mockAuthDataSource.signUp(email: email, password: pass))
-              .thenAnswer(
-            (_) async => Left<AppException, bool>(
-              ktestAppException,
-            ),
-          );
+          when(
+            () => mockSupabaseAuthService.signUp(email: email, password: pass),
+          ).thenThrow(ktestAppException);
 
           final response =
-              await mockAuthDataSource.signUp(email: email, password: pass);
+              await authDataSource.signUp(email: email, password: pass);
 
           expect(response.isLeft(), true);
         },
