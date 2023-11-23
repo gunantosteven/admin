@@ -9,7 +9,6 @@ void main() {
       (tester) async {
     final robot = Robot(tester);
     await robot.pumpMyApp();
-
     await robot.auth.replaceScreen();
 
     final emailTextFieldFinder = find.byType(CustomTextField);
