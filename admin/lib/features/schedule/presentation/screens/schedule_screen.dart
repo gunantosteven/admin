@@ -23,6 +23,15 @@ class ScheduleScreen extends ConsumerStatefulWidget {
 
 class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(listScheduleControllerProvider.notifier).initSchedule();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final schedulesRef = ref.watch(listScheduleControllerProvider);
     final deleteScheduleRef = ref.watch(deleteScheduleControllerProvider);

@@ -12,27 +12,31 @@ class ListScheduleController extends _$ListScheduleController {
 
   @override
   FutureOr<Stream<List<ScheduleModel>>> build() async {
-    return _fetchSchedule();
+    return const Stream.empty();
   }
 
-  FutureOr<Stream<List<ScheduleModel>>> _fetchSchedule() async {
-    final res = await ref
-        .watch(scheduleRepositoryProvider)
-        .streamSchedule(limit: _limit);
-    return res.fold((l) => throw l, (r) => r);
+  Future<void> initSchedule() async {
+    state = const AsyncLoading();
+    state = await _fetchSchedule();
   }
 
-  void loadMore() async {
+  Future<void> loadMore() async {
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(
-      () async {
-        _limit += pageLimit;
-        return await _fetchSchedule();
-      },
-    );
+    _limit += pageLimit;
+    state = await _fetchSchedule();
   }
 
   bool canLoadMore(int newLength) {
     return newLength % pageLimit == 0;
+  }
+
+  FutureOr<AsyncValue<Stream<List<ScheduleModel>>>> _fetchSchedule() async {
+    final res = await ref
+        .read(scheduleRepositoryProvider)
+        .streamSchedule(limit: _limit);
+
+    return res.fold(
+        (l) => AsyncValue.error(l.message ?? '', StackTrace.current),
+        AsyncValue.data);
   }
 }
