@@ -1,4 +1,4 @@
-import 'package:admin/shared/exception/http_exception.dart';
+import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

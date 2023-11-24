@@ -1,5 +1,5 @@
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
-import 'package:admin/shared/exception/http_exception.dart';
+import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ScheduleRepository {

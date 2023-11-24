@@ -5,7 +5,7 @@ import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
 import 'package:admin/features/schedule/domain/repositories/schedule_repository.dart';
 import 'package:admin/shared/constant/page_constant.dart';
-import 'package:admin/shared/exception/http_exception.dart';
+import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,6 +1,6 @@
 import 'package:admin/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:admin/features/auth/domain/repositories/auth_repository.dart';
-import 'package:admin/shared/exception/http_exception.dart';
+import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
