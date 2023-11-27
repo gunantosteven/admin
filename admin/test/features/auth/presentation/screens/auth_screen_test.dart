@@ -9,7 +9,7 @@ void main() {
       (tester) async {
     final robot = Robot(tester);
     await robot.pumpMyApp();
-    await robot.auth.replaceScreen();
+    await robot.authRobot.replaceScreen();
 
     final emailTextFieldFinder = find.byType(CustomTextField);
     final loginButtonFinder = find.byKey(AuthScreen.loginButtonKey);
