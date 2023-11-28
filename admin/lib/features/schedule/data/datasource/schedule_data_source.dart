@@ -1,8 +1,8 @@
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
+import 'package:admin/shared/data/supabase_service.dart';
 import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:admin/shared/utils/uuid.dart';
 import 'package:dartz/dartz.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> createSchedule(
@@ -18,28 +18,26 @@ abstract class ScheduleDataSource {
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
-  final SupabaseClient supabaseClient;
+  final SupabaseService supabaseService;
 
-  static const tableName = 'schedule';
-
-  ScheduleSupabaseDataSource(this.supabaseClient);
+  ScheduleSupabaseDataSource(this.supabaseService);
 
   @override
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
       {required int limit}) async {
     try {
-      final stream = supabaseClient
-          .from(tableName)
-          .stream(primaryKey: [ScheduleModel.idKey])
-          .order(ScheduleModel.createdAtKey, ascending: false)
-          .limit(limit)
+      final stream = supabaseService
+          .stream(
+              idKey: ScheduleModel.idKey,
+              orderKey: ScheduleModel.createdAtKey,
+              limit: limit)
           .map((event) {
-            var list = <ScheduleModel>[];
-            for (final item in event) {
-              list.add(ScheduleModel.fromJson(item));
-            }
-            return list;
-          });
+        var list = <ScheduleModel>[];
+        for (final item in event) {
+          list.add(ScheduleModel.fromJson(item));
+        }
+        return list;
+      });
       return Right(stream);
     } catch (e) {
       return Left(
@@ -56,7 +54,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> createSchedule(
       {required ScheduleModel scheduleModel}) async {
     try {
-      await supabaseClient.from(tableName).insert(
+      await supabaseService.insert(
         {
           ScheduleModel.idKey: generateNewUuid,
           ScheduleModel.titleKey: scheduleModel.title,
@@ -79,12 +77,11 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   Future<Either<AppException, ScheduleModel>> updateSchedule(
       {required ScheduleModel scheduleModel}) async {
     try {
-      await supabaseClient.from(tableName).update(
+      await supabaseService.update(
         {
           ScheduleModel.titleKey: scheduleModel.title,
         },
-      ).match(
-        {ScheduleModel.idKey: scheduleModel.id},
+        match: {ScheduleModel.idKey: scheduleModel.id},
       );
       return Right(scheduleModel.copyWith.call(id: generateNewUuid));
     } catch (e) {
@@ -102,22 +99,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   Future<Either<AppException, bool>> deleteSchedule(
       {required ScheduleModel scheduleModel}) async {
     try {
-      final data = await supabaseClient
-          .from(tableName)
-          .select()
-          .eq(ScheduleModel.idKey, scheduleModel.id);
-      if (data is List<dynamic> && data.isEmpty) {
-        return Left(
-          AppException(
-            message: 'Schedule not found!',
-            statusCode: 1,
-            identifier: 'SCHEDULENOTFOUNDScheduleDataSource.deleteSchedule',
-          ),
-        );
-      }
-      await supabaseClient.from(tableName).delete().match(
-        {ScheduleModel.idKey: scheduleModel.id},
-      );
+      await supabaseService.delete(ScheduleModel.idKey, scheduleModel.id);
       return const Right(true);
     } catch (e) {
       return Left(
@@ -134,12 +116,13 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
       {required int limit, required String title}) async {
     try {
-      final search = supabaseClient
-          .from(tableName)
-          .select()
-          .ilike(ScheduleModel.titleKey, '%$title%')
-          .order(ScheduleModel.createdAtKey, ascending: false)
-          .limit(limit)
+      final search = supabaseService
+          .search(
+              columnSearch: ScheduleModel.titleKey,
+              pattern: '%$title%',
+              orderKey: ScheduleModel.createdAtKey,
+              ascending: false,
+              limit: limit)
           .then((event) {
         var list = <ScheduleModel>[];
         for (final item in event) {

@@ -4,11 +4,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'supabase_service_provider.g.dart';
 
 @riverpod
-SupabaseClient supabaseService(SupabaseServiceRef ref) {
+SupabaseClient supabaseClientService(SupabaseClientServiceRef ref) {
   return Supabase.instance.client;
 }
 
 @riverpod
 GoTrueClient supabaseAuthService(SupabaseAuthServiceRef ref) {
-  return ref.watch(supabaseServiceProvider).auth;
+  return ref.watch(supabaseClientServiceProvider).auth;
 }

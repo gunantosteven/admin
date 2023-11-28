@@ -24,7 +24,8 @@ class Robot {
   Future<void> pumpMyApp() async {
     final container = ProviderContainer(
       overrides: [
-        supabaseServiceProvider.overrideWithValue(MockSupabaseService()),
+        supabaseClientServiceProvider
+            .overrideWithValue(MockSupabaseClientService()),
         supabaseAuthServiceProvider
             .overrideWithValue(MockSupabaseAuthService()),
         scheduleRepositoryProvider.overrideWithValue(MockScheduleRepository())

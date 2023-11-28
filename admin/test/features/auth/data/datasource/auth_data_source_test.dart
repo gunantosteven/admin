@@ -8,13 +8,13 @@ import '../../../../mocks.dart';
 
 void main() {
   late AuthDataSource authDataSource;
-  late MockSupabaseService mockSupabaseService;
+  late MockSupabaseClientService mockSupabaseClientService;
   late MockSupabaseAuthService mockSupabaseAuthService;
   setUpAll(() {
-    mockSupabaseService = MockSupabaseService();
+    mockSupabaseClientService = MockSupabaseClientService();
     mockSupabaseAuthService = MockSupabaseAuthService();
     authDataSource = AuthSupabaseDataSource(
-      mockSupabaseService,
+      mockSupabaseClientService,
       mockSupabaseAuthService,
     );
   });

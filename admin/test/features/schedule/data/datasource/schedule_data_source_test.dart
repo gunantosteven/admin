@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:admin/features/schedule/data/datasource/schedule_data_source.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/shared/constant/page_constant.dart';
-import 'package:admin/shared/exceptions/http_exception.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -12,10 +11,12 @@ import '../../../../mocks.dart';
 import '../../domain/models/schedule_model_test.dart';
 
 void main() {
-  late MockScheduleDataSource mockScheduleDataSource;
+  late MockSupabaseService mockSupabaseService;
+  late ScheduleDataSource scheduleDataSource;
 
   setUpAll(() {
-    mockScheduleDataSource = MockScheduleDataSource();
+    mockSupabaseService = MockSupabaseService();
+    scheduleDataSource = ScheduleSupabaseDataSource(mockSupabaseService);
   });
 
   group(
@@ -23,26 +24,24 @@ void main() {
     () {
       const limit = pageLimit;
 
-      final StreamController<List<ScheduleModel>> streamController =
-          StreamController<List<ScheduleModel>>();
-      streamController.add([ktestScheduleModel]);
+      final StreamController<List<Map<String, dynamic>>> streamController =
+          StreamController<List<Map<String, dynamic>>>();
+      streamController.add([ktestScheduleMap]);
 
       test(
         'streamSchedule on success',
         () async {
-          final StreamController<List<ScheduleModel>> streamController =
-              StreamController<List<ScheduleModel>>();
-          streamController.add([ktestScheduleModel]);
           when(
-            () => mockScheduleDataSource.streamSchedule(limit: limit),
+            () => mockSupabaseService.stream(
+                idKey: ScheduleModel.idKey,
+                orderKey: ScheduleModel.createdAtKey,
+                limit: limit),
           ).thenAnswer(
-            (_) async => Right<AppException, Stream<List<ScheduleModel>>>(
-              streamController.stream,
-            ),
+            (_) => streamController.stream,
           );
 
           final response =
-              await mockScheduleDataSource.streamSchedule(limit: limit);
+              await scheduleDataSource.streamSchedule(limit: limit);
 
           expect(response.isRight(), true);
         },
@@ -52,14 +51,16 @@ void main() {
         'streamSchedule on failure',
         () async {
           when(
-            () => mockScheduleDataSource.streamSchedule(limit: limit),
-          ).thenAnswer(
-            (_) async => Left<AppException, Stream<List<ScheduleModel>>>(
-                ktestAppException),
+            () => mockSupabaseService.stream(
+                idKey: ScheduleModel.idKey,
+                orderKey: ScheduleModel.createdAtKey,
+                limit: limit),
+          ).thenThrow(
+            ktestAppException,
           );
 
           final response =
-              await mockScheduleDataSource.streamSchedule(limit: limit);
+              await scheduleDataSource.streamSchedule(limit: limit);
 
           expect(response.isLeft(), true);
         },

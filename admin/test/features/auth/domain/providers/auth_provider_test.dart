@@ -8,10 +8,10 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../../mocks.dart';
 
 void main() {
-  final mockSupabaseService = MockSupabaseService();
+  final mockSupabaseClientService = MockSupabaseClientService();
   final mockSupabaseAuthService = MockSupabaseAuthService();
   final providerContainer = ProviderContainer(overrides: [
-    supabaseServiceProvider.overrideWithValue(mockSupabaseService),
+    supabaseClientServiceProvider.overrideWithValue(mockSupabaseClientService),
     supabaseAuthServiceProvider.overrideWithValue(mockSupabaseAuthService)
   ]);
   late dynamic authDataSource;
@@ -19,8 +19,8 @@ void main() {
 
   setUpAll(
     () {
-      authDataSource = providerContainer
-          .read(authDataSourceProvider(supabaseClient: mockSupabaseService));
+      authDataSource = providerContainer.read(
+          authDataSourceProvider(supabaseClient: mockSupabaseClientService));
       authRepository = providerContainer.read(authRepositoryProvider);
     },
   );

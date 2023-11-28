@@ -17,6 +17,8 @@ class ScheduleModel with _$ScheduleModel {
     DateTime? createdAt,
   }) = _ScheduleModel;
 
+  static const tableName = 'schedule';
+
   static const idKey = 'id';
   static const titleKey = 'title';
   static const createdAtKey = 'created_at';

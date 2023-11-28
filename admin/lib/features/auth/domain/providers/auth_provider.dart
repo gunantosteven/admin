@@ -17,7 +17,7 @@ AuthSupabaseDataSource authDataSource(AuthDataSourceRef ref,
 @riverpod
 AuthRepository authRepository(AuthRepositoryRef ref) {
   final SupabaseClient supabaseClientService =
-      ref.watch(supabaseServiceProvider);
+      ref.watch(supabaseClientServiceProvider);
   final AuthDataSource dataSource =
       ref.watch(authDataSourceProvider(supabaseClient: supabaseClientService));
   return AuthRepositoryImpl(dataSource);
