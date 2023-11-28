@@ -6,8 +6,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../dummy_data.dart';
 import '../../../../mocks.dart';
 
-class MockAuthDataSource extends Mock implements AuthDataSource {}
-
 void main() {
   late AuthDataSource authDataSource;
   late MockSupabaseService mockSupabaseService;

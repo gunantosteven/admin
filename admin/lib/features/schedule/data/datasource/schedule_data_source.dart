@@ -46,7 +46,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
         AppException(
           message: 'Unknown error occured',
           statusCode: 1,
-          identifier: '${e.toString()}ScheduleDataSource.addSchedule',
+          identifier: '${e.toString()}ScheduleDataSource.streamSchedule',
         ),
       );
     }
