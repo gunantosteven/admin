@@ -12,9 +12,9 @@ abstract class ScheduleDataSource {
   Future<Either<AppException, bool>> deleteSchedule(
       {required ScheduleModel scheduleModel});
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit});
+      {required int limit, bool ascending});
   Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
-      {required int limit, required String title});
+      {required int limit, required String title, bool ascending});
 }
 
 class ScheduleSupabaseDataSource implements ScheduleDataSource {
@@ -24,12 +24,13 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
 
   @override
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit}) async {
+      {required int limit, bool ascending = false}) async {
     try {
       final stream = supabaseService
           .stream(
               idKey: ScheduleModel.idKey,
               orderKey: ScheduleModel.createdAtKey,
+              ascending: ascending,
               limit: limit)
           .map((event) {
         var list = <ScheduleModel>[];
@@ -114,14 +115,16 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
 
   @override
   Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
-      {required int limit, required String title}) async {
+      {required int limit,
+      required String title,
+      bool ascending = false}) async {
     try {
       final search = supabaseService
           .search(
               columnSearch: ScheduleModel.titleKey,
               pattern: '%$title%',
               orderKey: ScheduleModel.createdAtKey,
-              ascending: false,
+              ascending: ascending,
               limit: limit)
           .then((event) {
         var list = <ScheduleModel>[];

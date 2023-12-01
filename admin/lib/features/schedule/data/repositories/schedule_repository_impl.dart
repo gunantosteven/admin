@@ -29,13 +29,14 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
 
   @override
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit}) {
-    return dataSource.streamSchedule(limit: limit);
+      {required int limit, bool ascending = false}) {
+    return dataSource.streamSchedule(limit: limit, ascending: ascending);
   }
 
   @override
   Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
-      {required int limit, required String title}) {
-    return dataSource.searchSchedule(limit: limit, title: title);
+      {required int limit, required String title, bool ascending = false}) {
+    return dataSource.searchSchedule(
+        limit: limit, title: title, ascending: ascending);
   }
 }

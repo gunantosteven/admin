@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin/features/schedule/application/sort_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
 import 'package:admin/shared/constant/page_constant.dart';
@@ -23,13 +24,20 @@ class SearchScheduleController extends _$SearchScheduleController {
 
   FutureOr<List<ScheduleModel>> _searchSchedule(String title) async {
     _searchText = title;
+    final ascending = ref.read(sortScheduleControllerProvider).value ?? false;
     final res = await ref
         .watch(scheduleRepositoryProvider)
-        .searchSchedule(limit: _limit, title: title);
+        .searchSchedule(limit: _limit, title: title, ascending: ascending);
     return res.fold((l) => throw l, (r) => r);
   }
 
   void search(String title) async {
+    // If empty change back to realtime stream (list_schedule_controller)
+    if (title.isEmpty) {
+      _searchText = title;
+      state = const AsyncData([]);
+      return;
+    }
     state = const AsyncValue.loading();
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () async {

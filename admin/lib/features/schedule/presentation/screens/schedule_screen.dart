@@ -1,6 +1,7 @@
 import 'package:admin/features/schedule/application/delete_schedule_controller.dart';
 import 'package:admin/features/schedule/application/list_schedule_controller.dart';
 import 'package:admin/features/schedule/application/search_schedule_controller.dart';
+import 'package:admin/features/schedule/application/sort_schedule_controller.dart';
 import 'package:admin/features/schedule/presentation/widgets/custom_list_schedule.dart';
 import 'package:admin/features/schedule/presentation/widgets/sort_dialog.dart';
 import 'package:admin/routes/app_route.dart';
@@ -59,6 +60,17 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               text: o.toString(),
             );
           },
+          loading: () {});
+    });
+
+    ref.listen<AsyncValue<bool>>(sortScheduleControllerProvider,
+        (previous, next) {
+      next.when(
+          data: (data) {
+            ref.read(searchScheduleControllerProvider.notifier).reload();
+            ref.read(listScheduleControllerProvider.notifier).initSchedule();
+          },
+          error: (o, s) {},
           loading: () {});
     });
 

@@ -1,21 +1,29 @@
+import 'package:admin/features/schedule/application/sort_schedule_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SortDialog extends StatefulWidget {
+class SortDialog extends ConsumerStatefulWidget {
   const SortDialog({
     super.key,
   });
 
   @override
-  State<SortDialog> createState() => _SortDialogState();
+  ConsumerState<SortDialog> createState() => _SortDialogState();
 }
 
-class _SortDialogState extends State<SortDialog> {
+class _SortDialogState extends ConsumerState<SortDialog> {
   int selectedOption = 2;
+
+  @override
+  void initState() {
+    selectedOption = ref.read(sortScheduleControllerProvider).value! ? 1 : 2;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Sorting by Created Date'),
+      title: const Text('Sort by Created Date'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         ListTile(
           title: const Text('Ascending'),
@@ -50,8 +58,11 @@ class _SortDialogState extends State<SortDialog> {
         FilledButton(
           onPressed: () {
             Navigator.of(context).pop();
+            ref
+                .read(sortScheduleControllerProvider.notifier)
+                .sortSchedule(selectedOption == 1);
           },
-          child: const Text('Sorting'),
+          child: const Text('Sort'),
         ),
       ],
     );

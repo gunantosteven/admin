@@ -1,3 +1,4 @@
+import 'package:admin/features/schedule/application/sort_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
 import 'package:admin/shared/constant/page_constant.dart';
@@ -31,9 +32,10 @@ class ListScheduleController extends _$ListScheduleController {
   }
 
   FutureOr<AsyncValue<Stream<List<ScheduleModel>>>> _fetchSchedule() async {
+    final ascending = ref.read(sortScheduleControllerProvider).value ?? false;
     final res = await ref
         .read(scheduleRepositoryProvider)
-        .streamSchedule(limit: _limit);
+        .streamSchedule(limit: _limit, ascending: ascending);
 
     return res.fold(
         (l) => AsyncValue.error(l.message ?? '', StackTrace.current),
