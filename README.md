@@ -2,7 +2,7 @@
 
 **(Still on Progress) It could be happened massive changes**
 
-Portofolio Purpose Project with Flutter (Web, Android, iOS, MacOS and Windows)
+Portofolio Purpose Project with Flutter (Android, iOS, Web, and Desktop)
 
 Features so far:
 
