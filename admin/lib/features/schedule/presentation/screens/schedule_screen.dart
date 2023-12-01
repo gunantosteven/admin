@@ -2,7 +2,9 @@ import 'package:admin/features/schedule/application/delete_schedule_controller.d
 import 'package:admin/features/schedule/application/list_schedule_controller.dart';
 import 'package:admin/features/schedule/application/search_schedule_controller.dart';
 import 'package:admin/features/schedule/presentation/widgets/custom_list_schedule.dart';
+import 'package:admin/features/schedule/presentation/widgets/sort_dialog.dart';
 import 'package:admin/routes/app_route.dart';
+import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_snackbar.dart';
 import 'package:admin/shared/widgets/custom_text.dart';
@@ -68,6 +70,16 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               : '(Realtime Stream)'),
           textType: TextType.H4,
         ),
+        actions: [
+          CustomButton(
+            onPressed: () {
+              showDialog(
+                  context: context, builder: (context) => const SortDialog());
+            },
+            buttonType: ButtonType.ICON,
+            icon: Icons.sort,
+          ),
+        ],
       ),
       body: Stack(
         children: [
