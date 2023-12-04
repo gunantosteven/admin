@@ -1,6 +1,7 @@
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
+import 'package:admin/shared/widgets/custom_date.dart';
 import 'package:admin/shared/widgets/custom_textfield.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,6 +32,10 @@ class FormSchedule extends ConsumerWidget {
             controller: titleController,
             placeholder: AppLocalizations.of(context)!.title,
           ),
+          AppSpacer.height16,
+          CustomDate(onSelectedDate: (date) {
+            debugPrint(date.toString());
+          }),
           AppSpacer.height24,
           CustomButton(
             buttonType: ButtonType.DEFAULT,

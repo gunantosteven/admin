@@ -10,12 +10,16 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.placeholder,
     this.onChanged,
+    this.onTap,
+    this.readOnly = false,
     required this.textFieldType,
   });
 
   final TextEditingController? controller;
   final String? placeholder;
   final ValueChanged<String>? onChanged;
+  final Function()? onTap;
+  final bool readOnly;
 
   final TextFieldType textFieldType;
 
@@ -48,6 +52,8 @@ class CustomTextField extends StatelessWidget {
                     ),
                   ),
           ),
+          onTap: onTap,
+          readOnly: readOnly,
         );
       default:
         return TextField(
@@ -57,6 +63,8 @@ class CustomTextField extends StatelessWidget {
             border: const OutlineInputBorder(),
             labelText: placeholder,
           ),
+          onTap: onTap,
+          readOnly: readOnly,
         );
     }
   }

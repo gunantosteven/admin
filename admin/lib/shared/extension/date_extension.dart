@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 final simpleDateTime = DateFormat('MMM dd yyyy hh:mm a');
 final simpleDate = DateFormat('MMM dd yyyy');
+final dayOfWeekDate = DateFormat('E, dd MMM yyyy');
 
 extension DateTimeExtension on DateTime {
   String string(DateType dateType) {
@@ -10,6 +11,8 @@ extension DateTimeExtension on DateTime {
         return simpleDateTime.format(this);
       case DateType.simpleDate:
         return simpleDate.format(this);
+      case DateType.dayOfWeekDate:
+        return dayOfWeekDate.format(this);
     }
   }
 
@@ -24,7 +27,9 @@ DateTime getDateFromString(String string, DateType dateType) {
       return simpleDateTime.parse(string);
     case DateType.simpleDate:
       return simpleDate.parse(string);
+    case DateType.dayOfWeekDate:
+      return dayOfWeekDate.parse(string);
   }
 }
 
-enum DateType { simpleDateTime, simpleDate }
+enum DateType { simpleDateTime, simpleDate, dayOfWeekDate }
