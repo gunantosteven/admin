@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 Map<String, dynamic> ktestScheduleMap = {
   "id": '20231115-0620-8a33-8795-947684be0112',
   "title": "title",
+  "date": "2023-12-05T13:20:33.795Z",
   "created_at": "2023-11-15T13:20:33.795Z"
 };
 
