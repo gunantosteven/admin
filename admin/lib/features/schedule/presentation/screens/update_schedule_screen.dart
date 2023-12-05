@@ -72,12 +72,15 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
         children: [
           FormSchedule(
             titleController: _titleController,
-            onConfirm: () {
+            scheduleModel: widget.scheduleModel,
+            onConfirm: (date, time) {
               ref
                   .read(updateScheduleControllerProvider.notifier)
                   .updateSchedule(
                     currentSchedule: widget.scheduleModel,
                     newTitle: _titleController.text,
+                    newDate: date,
+                    newTime: time,
                   );
             },
           ),

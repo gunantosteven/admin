@@ -29,7 +29,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       final stream = supabaseService
           .stream(
               idKey: ScheduleModel.idKey,
-              orderKey: ScheduleModel.createdAtKey,
+              orderKey: ScheduleModel.dateKey,
               ascending: ascending,
               limit: limit)
           .map((event) {
@@ -59,6 +59,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
         {
           ScheduleModel.idKey: generateNewUuid,
           ScheduleModel.titleKey: scheduleModel.title,
+          ScheduleModel.dateKey: scheduleModel.date.toString(),
           ScheduleModel.createdAtKey: DateTime.now().toString(),
         },
       );
@@ -81,6 +82,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       await supabaseService.update(
         {
           ScheduleModel.titleKey: scheduleModel.title,
+          ScheduleModel.dateKey: scheduleModel.date.toString(),
         },
         match: {ScheduleModel.idKey: scheduleModel.id},
       );
@@ -123,7 +125,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
           .search(
               columnSearch: ScheduleModel.titleKey,
               pattern: '%$title%',
-              orderKey: ScheduleModel.createdAtKey,
+              orderKey: ScheduleModel.dateKey,
               ascending: ascending,
               limit: limit)
           .then((event) {

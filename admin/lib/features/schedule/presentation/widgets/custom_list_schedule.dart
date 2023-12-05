@@ -129,9 +129,8 @@ class _CustomListScheduleState extends ConsumerState<CustomListSchedule> {
               return ListTile(
                 key: Key(index.toString()),
                 title: Text(scheduleModel.title),
-                subtitle: Text(
-                    scheduleModel.createdAt?.string(DateType.simpleDateTime) ??
-                        ''),
+                subtitle:
+                    Text(scheduleModel.date.string(DateType.simpleDateTime)),
                 onTap: () => AutoRouter.of(context).push(
                   UpdateScheduleRoute(scheduleModel: scheduleModel),
                 ),

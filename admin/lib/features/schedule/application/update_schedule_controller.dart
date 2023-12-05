@@ -1,6 +1,7 @@
 import 'package:admin/features/schedule/application/search_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'update_schedule_controller.g.dart';
@@ -15,9 +16,14 @@ class UpdateScheduleController extends _$UpdateScheduleController {
 
   Future<void> updateSchedule(
       {required ScheduleModel currentSchedule,
-      required String newTitle}) async {
+      required String newTitle,
+      required DateTime newDate,
+      required TimeOfDay newTime}) async {
     state = const AsyncLoading();
-    final updateSchedule = currentSchedule.copyWith.call(title: newTitle);
+    final newScheduleDate = DateTime(
+        newDate.year, newDate.month, newDate.day, newTime.hour, newTime.minute);
+    final updateSchedule =
+        currentSchedule.copyWith.call(title: newTitle, date: newScheduleDate);
     final res = await ref
         .read(scheduleRepositoryProvider)
         .updateSchedule(scheduleModel: updateSchedule);

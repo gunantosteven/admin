@@ -12,7 +12,7 @@ class SortDialog extends ConsumerStatefulWidget {
 }
 
 class _SortDialogState extends ConsumerState<SortDialog> {
-  int selectedOption = 2;
+  int selectedOption = 1;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _SortDialogState extends ConsumerState<SortDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Sort by Created Date'),
+      title: const Text('Sort by Date'),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         ListTile(
           title: const Text('Ascending'),

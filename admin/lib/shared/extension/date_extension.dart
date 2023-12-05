@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-final simpleDateTime = DateFormat('MMM dd yyyy hh:mm a');
+final simpleDateTime = DateFormat('MMM dd yyyy HH:mm');
 final simpleDate = DateFormat('MMM dd yyyy');
 final dayOfWeekDate = DateFormat('E, dd MMM yyyy');
 

@@ -24,8 +24,13 @@ class _CustomDateState extends State<CustomDate> {
 
   @override
   void initState() {
-    textEditingController.text = textEditingController.text =
-        dateNow.string(DateType.dayOfWeekDate).toString();
+    if (widget.initialDate != null) {
+      textEditingController.text =
+          widget.initialDate!.string(DateType.dayOfWeekDate).toString();
+    } else {
+      textEditingController.text =
+          dateNow.string(DateType.dayOfWeekDate).toString();
+    }
     super.initState();
   }
 
