@@ -32,7 +32,7 @@ class ListScheduleController extends _$ListScheduleController {
   }
 
   FutureOr<AsyncValue<Stream<List<ScheduleModel>>>> _fetchSchedule() async {
-    final ascending = ref.read(sortScheduleControllerProvider).value ?? false;
+    final ascending = ref.read(sortScheduleControllerProvider).value ?? true;
     final res = await ref
         .read(scheduleRepositoryProvider)
         .streamSchedule(limit: _limit, ascending: ascending);

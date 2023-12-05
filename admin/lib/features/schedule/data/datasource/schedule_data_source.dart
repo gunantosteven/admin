@@ -24,7 +24,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
 
   @override
   Future<Either<AppException, Stream<List<ScheduleModel>>>> streamSchedule(
-      {required int limit, bool ascending = false}) async {
+      {required int limit, bool ascending = true}) async {
     try {
       final stream = supabaseService
           .stream(
@@ -119,7 +119,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
   Future<Either<AppException, Future<List<ScheduleModel>>>> searchSchedule(
       {required int limit,
       required String title,
-      bool ascending = false}) async {
+      bool ascending = true}) async {
     try {
       final search = supabaseService
           .search(

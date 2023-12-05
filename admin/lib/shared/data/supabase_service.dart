@@ -10,7 +10,7 @@ class SupabaseService {
   Stream<List<Map<String, dynamic>>> stream(
       {required String idKey,
       required String orderKey,
-      bool ascending = false,
+      bool ascending = true,
       required int limit}) {
     final stream = supabaseClient
         .from(tableName)

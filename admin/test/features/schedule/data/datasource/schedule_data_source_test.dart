@@ -34,7 +34,7 @@ void main() {
           when(
             () => mockSupabaseService.stream(
                 idKey: ScheduleModel.idKey,
-                orderKey: ScheduleModel.createdAtKey,
+                orderKey: ScheduleModel.dateKey,
                 limit: limit),
           ).thenAnswer(
             (_) => streamController.stream,
@@ -53,7 +53,7 @@ void main() {
           when(
             () => mockSupabaseService.stream(
                 idKey: ScheduleModel.idKey,
-                orderKey: ScheduleModel.createdAtKey,
+                orderKey: ScheduleModel.dateKey,
                 limit: limit),
           ).thenThrow(
             ktestAppException,
