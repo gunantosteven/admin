@@ -43,3 +43,4 @@ https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introducti
 - https://github.com/vhodiak/flutter_ddd_riverpod_example
 - https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod
 - https://github.com/bizz84/complete-flutter-course
+- https://medium.com/@mrijalulkahfi/form-validation-with-riverpod-formz-and-freezed-part-2-logic-29f45c677a11
