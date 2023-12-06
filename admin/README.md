@@ -13,6 +13,7 @@ Flutter Stack:
 - Design System: WidgetBook
 - Localization : flutter_localizations
 - Unit Test: Mocktail
+- Form Validation: formz
 
 ## How to run
 
