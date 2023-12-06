@@ -15,6 +15,7 @@ Features so far:
 - Search
 - Localization
 - Theme Dark or Light
+- Form Validation
 
 
 [Check the Project Stack](https://github.com/gunantosteven/admin/tree/main/admin#readme)
