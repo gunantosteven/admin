@@ -1,5 +1,5 @@
 import 'package:admin/features/schedule/application/new_schedule_controller.dart';
-import 'package:admin/features/schedule/domain/models/schedule_model.dart';
+import 'package:admin/features/schedule/application/state/new_schedule_state.dart';
 import 'package:admin/features/schedule/presentation/widgets/form_schedule.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
 import 'package:admin/shared/widgets/custom_snackbar.dart';
@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:formz/formz.dart';
 
 @RoutePage()
 class NewScheduleScreen extends ConsumerStatefulWidget {
@@ -34,11 +35,11 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<ScheduleModel?>>(newScheduleControllerProvider,
+    ref.listen<AsyncValue<NewScheduleState>>(newScheduleControllerProvider,
         (previous, next) {
       next.when(
           data: (data) {
-            if (data != null) {
+            if (data.status == FormzSubmissionStatus.success) {
               CustomSnackbar.show(
                   context: context,
                   type: ToastType.SUCCESS,
@@ -56,6 +57,9 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
           loading: () {});
     });
 
+    final title = ref.watch(newScheduleControllerProvider).value?.title;
+    final notifier = ref.read(newScheduleControllerProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
@@ -67,8 +71,11 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
         children: [
           FormSchedule(
             titleController: _titleController,
+            onChangedTitle: (value) => notifier.updateTitle(value),
+            titleValidator: (value) => title?.error?.getMessage(),
+            enabledButton: notifier.isValidForm(),
             onConfirm: (date, time) {
-              ref.read(newScheduleControllerProvider.notifier).createSchedule(
+              notifier.createSchedule(
                   title: _titleController.text, date: date, time: time);
             },
           ),

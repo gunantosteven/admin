@@ -78,6 +78,9 @@ dependencies:
 
   # A Dart mock library which simplifies mocking with null safety support and no manual mocks or code generation.
   mocktail: ^1.0.1
+
+  # A unified form representation in Dart which aims to simplify form representation and validation in a generic way.
+  formz: ^0.6.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

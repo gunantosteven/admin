@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.onTap,
     this.readOnly = false,
+    this.validator,
     required this.textFieldType,
   });
 
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final Function()? onTap;
   final bool readOnly;
+  final FormFieldValidator<String>? validator;
 
   final TextFieldType textFieldType;
 
@@ -56,7 +58,7 @@ class CustomTextField extends StatelessWidget {
           readOnly: readOnly,
         );
       default:
-        return TextField(
+        return TextFormField(
           key: key,
           controller: controller,
           decoration: InputDecoration(
@@ -65,6 +67,9 @@ class CustomTextField extends StatelessWidget {
           ),
           onTap: onTap,
           readOnly: readOnly,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
+          onChanged: onChanged,
         );
     }
   }

@@ -14,6 +14,9 @@ class FormSchedule extends ConsumerStatefulWidget {
     super.key,
     this.padding = AppPadding.all24,
     this.scheduleModel,
+    this.onChangedTitle,
+    this.titleValidator,
+    this.enabledButton = true,
     required this.titleController,
     required this.onConfirm,
   });
@@ -21,6 +24,12 @@ class FormSchedule extends ConsumerStatefulWidget {
   final EdgeInsetsGeometry padding;
 
   final ScheduleModel? scheduleModel;
+
+  final ValueChanged<String>? onChangedTitle;
+
+  final FormFieldValidator<String>? titleValidator;
+
+  final bool enabledButton;
 
   final TextEditingController titleController;
 
@@ -59,6 +68,8 @@ class _FormScheduleState extends ConsumerState<FormSchedule> {
             textFieldType: TextFieldType.DEFAULT,
             controller: widget.titleController,
             placeholder: AppLocalizations.of(context)!.title,
+            onChanged: widget.onChangedTitle,
+            validator: widget.titleValidator,
           ),
           AppSpacer.height16,
           CustomDate(
@@ -80,13 +91,15 @@ class _FormScheduleState extends ConsumerState<FormSchedule> {
           CustomButton(
             buttonType: ButtonType.DEFAULT,
             text: AppLocalizations.of(context)!.save,
-            onPressed: () {
-              if (widget.onConfirm != null &&
-                  selectedDate != null &&
-                  selectedTime != null) {
-                widget.onConfirm!(selectedDate!, selectedTime!);
-              }
-            },
+            onPressed: !widget.enabledButton
+                ? null
+                : () {
+                    if (widget.onConfirm != null &&
+                        selectedDate != null &&
+                        selectedTime != null) {
+                      widget.onConfirm!(selectedDate!, selectedTime!);
+                    }
+                  },
           ),
         ],
       ),
