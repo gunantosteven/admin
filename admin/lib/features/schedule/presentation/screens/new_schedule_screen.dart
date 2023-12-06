@@ -75,8 +75,7 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
             titleValidator: (value) => title?.error?.getMessage(),
             enabledButton: notifier.isValidForm(),
             onConfirm: (date, time) {
-              notifier.createSchedule(
-                  title: _titleController.text, date: date, time: time);
+              notifier.createSchedule(date: date, time: time);
             },
           ),
           Consumer(

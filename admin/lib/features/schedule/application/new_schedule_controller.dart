@@ -21,7 +21,7 @@ class NewScheduleController extends _$NewScheduleController {
     if (state.value == null) {
       return false;
     }
-    return state.value!.title.isValid;
+    return state.requireValue.title.isValid;
   }
 
   void updateTitle(String value) {
@@ -34,14 +34,13 @@ class NewScheduleController extends _$NewScheduleController {
   }
 
   Future<void> createSchedule(
-      {required String title,
-      required DateTime date,
-      required TimeOfDay time}) async {
+      {required DateTime date, required TimeOfDay time}) async {
     state = const AsyncLoading();
     final scheduleDate =
         DateTime(date.year, date.month, date.day, time.hour, time.minute);
     final res = await ref.read(scheduleRepositoryProvider).createSchedule(
-          scheduleModel: ScheduleModel(title: title, date: scheduleDate),
+          scheduleModel: ScheduleModel(
+              title: state.requireValue.title.value, date: scheduleDate),
         );
     state = res.fold(
       (l) => AsyncValue.error(l.message ?? '', StackTrace.current),
