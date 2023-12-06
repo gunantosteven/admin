@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/application/sort_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/sort_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
 import 'package:admin/shared/constant/page_constant.dart';

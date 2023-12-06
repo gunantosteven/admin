@@ -1,7 +1,7 @@
-import 'package:admin/features/schedule/application/delete_schedule_controller.dart';
-import 'package:admin/features/schedule/application/list_schedule_controller.dart';
-import 'package:admin/features/schedule/application/search_schedule_controller.dart';
-import 'package:admin/features/schedule/application/sort_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/delete_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/list_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/search_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/sort_schedule_controller.dart';
 import 'package:admin/features/schedule/presentation/widgets/custom_list_schedule.dart';
 import 'package:admin/features/schedule/presentation/widgets/sort_dialog.dart';
 import 'package:admin/routes/app_route.dart';

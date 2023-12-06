@@ -1,4 +1,5 @@
-import 'package:admin/features/schedule/application/update_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/update_schedule_controller.dart';
+import 'package:admin/features/schedule/application/state/update_schedule_state.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/presentation/widgets/form_schedule.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';
@@ -8,6 +9,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:formz/formz.dart';
 
 @RoutePage()
 class UpdateScheduleScreen extends ConsumerStatefulWidget {
@@ -29,6 +31,12 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
   void initState() {
     super.initState();
 
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ref
+    //       .read(updateScheduleControllerProvider(widget.scheduleModel).notifier)
+    //       .updateTitle(widget.scheduleModel.title);
+    // });
+
     _titleController.text = widget.scheduleModel.title;
   }
 
@@ -39,11 +47,14 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<ScheduleModel?>>(updateScheduleControllerProvider,
-        (previous, next) {
+    final provider = UpdateScheduleControllerProvider(widget.scheduleModel);
+    final watch = ref.watch(provider);
+    final notifier = ref.read(provider.notifier);
+
+    ref.listen<AsyncValue<UpdateScheduleState>>(provider, (previous, next) {
       next.when(
           data: (data) {
-            if (data != null) {
+            if (data.status == FormzSubmissionStatus.success) {
               CustomSnackbar.show(
                   context: context,
                   type: ToastType.SUCCESS,
@@ -72,23 +83,21 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
         children: [
           FormSchedule(
             titleController: _titleController,
+            onChangedTitle: (value) => notifier.updateTitle(value),
+            titleValidator: (value) => watch.value?.title.error?.getMessage(),
+            enabledButton: notifier.isValidForm(),
             scheduleModel: widget.scheduleModel,
             onConfirm: (date, time) {
-              ref
-                  .read(updateScheduleControllerProvider.notifier)
-                  .updateSchedule(
-                    currentSchedule: widget.scheduleModel,
-                    newTitle: _titleController.text,
-                    newDate: date,
-                    newTime: time,
-                  );
+              notifier.updateSchedule(
+                currentSchedule: widget.scheduleModel,
+                newDate: date,
+                newTime: time,
+              );
             },
           ),
           Consumer(
             builder: (context, ref, child) {
-              final state = ref.watch(updateScheduleControllerProvider);
-
-              return state.maybeWhen(
+              return watch.maybeWhen(
                   loading: () => const CustomLoading(),
                   orElse: () => Container());
             },

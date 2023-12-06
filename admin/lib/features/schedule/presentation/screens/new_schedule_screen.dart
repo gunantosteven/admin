@@ -1,4 +1,4 @@
-import 'package:admin/features/schedule/application/new_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/new_schedule_controller.dart';
 import 'package:admin/features/schedule/application/state/new_schedule_state.dart';
 import 'package:admin/features/schedule/presentation/widgets/form_schedule.dart';
 import 'package:admin/shared/widgets/custom_loading.dart';

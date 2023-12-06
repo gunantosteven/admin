@@ -24,7 +24,7 @@ class TitleFormz extends FormzInput<String, TitleValidationError> {
   TitleValidationError? validator(String value) {
     if (value.isEmpty) return TitleValidationError.empty;
 
-    if (value.length <= 5) {
+    if (value.length < 5) {
       return TitleValidationError.invalid;
     }
 

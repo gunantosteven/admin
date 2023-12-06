@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:admin/features/schedule/application/list_schedule_controller.dart';
+import 'package:admin/features/schedule/application/controller/list_schedule_controller.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
 import 'package:admin/features/schedule/domain/repositories/schedule_repository.dart';
