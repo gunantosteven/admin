@@ -11,9 +11,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../dummy_data.dart';
-import '../../../mocks.dart';
-import '../domain/models/schedule_model_test.dart';
+import '../../../../dummy_data.dart';
+import '../../../../mocks.dart';
+import '../../domain/models/schedule_model_test.dart';
 
 void main() {
   ProviderContainer makeProviderContainer(
