@@ -33,7 +33,7 @@ bash flutter run -d macos -t lib/widgetbook/widgetbook.dart
 
 https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/
 
-## Refernce Material 3 Adaptive Layout
+## Reference Material 3 Adaptive Layout
 
 - https://github.com/flutter/samples/tree/main/material_3_demo
 - https://flutter.github.io/samples/web/material_3_demo/
