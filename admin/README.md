@@ -8,7 +8,7 @@ Flutter Stack:
 - Project Structure : Features Based
 - Database : Supabase
 - Auth : Supabase
-- State Management : Riverpod with annotation
+- State Management : Riverpod
 - Route : auto_route
 - Design System: WidgetBook
 - Localization : flutter_localizations
