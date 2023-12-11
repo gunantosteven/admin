@@ -14,13 +14,13 @@ class ScheduleModel with _$ScheduleModel {
   /// [userId] - [ScheduleModel] userId
   /// [user] - [ScheduleModel] user model
   /// [createdAt] - [ScheduleModel] createdAt
-  @JsonSerializable(fieldRename: FieldRename.snake)
+  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory ScheduleModel({
     @JsonKey(includeIfNull: false) String? id,
     @Default('') String title,
     required DateTime date,
     String? userId,
-    UserModel? user,
+    @JsonKey(name: 'user') UserModel? userModel,
     DateTime? createdAt,
   }) = _ScheduleModel;
 
@@ -30,6 +30,7 @@ class ScheduleModel with _$ScheduleModel {
   static const titleKey = 'title';
   static const dateKey = 'date';
   static const userIdKey = 'user_id';
+  static const userKey = 'user';
   static const createdAtKey = 'created_at';
 
   /// Serialization
