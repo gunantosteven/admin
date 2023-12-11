@@ -53,6 +53,7 @@ class SupabaseService {
   }
 
   Future<dynamic> search({
+    String select = '',
     required String columnSearch,
     required String pattern,
     required String orderKey,
@@ -61,7 +62,7 @@ class SupabaseService {
   }) async {
     return await supabaseClient
         .from(tableName)
-        .select()
+        .select(select)
         .ilike(columnSearch, '%$pattern%')
         .order(orderKey, ascending: ascending)
         .limit(limit);

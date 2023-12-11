@@ -1,4 +1,5 @@
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
+import 'package:admin/features/user/domain/models/user_model.dart';
 import 'package:admin/shared/data/supabase_service.dart';
 import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:admin/shared/utils/uuid.dart';
@@ -123,6 +124,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
     try {
       final search = supabaseService
           .search(
+              select: '*, ${UserModel.tableName}(*)',
               columnSearch: ScheduleModel.titleKey,
               pattern: '%$title%',
               orderKey: ScheduleModel.dateKey,
