@@ -62,6 +62,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
           ScheduleModel.titleKey: scheduleModel.title,
           ScheduleModel.dateKey: scheduleModel.date.toString(),
           ScheduleModel.createdAtKey: DateTime.now().toString(),
+          ScheduleModel.userIdKey: scheduleModel.userId
         },
       );
       return Right(scheduleModel.copyWith.call(id: generateNewUuid));

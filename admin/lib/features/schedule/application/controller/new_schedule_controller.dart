@@ -3,6 +3,7 @@ import 'package:admin/features/schedule/application/state/new_schedule_state.dar
 import 'package:admin/features/schedule/domain/forms/title_formz.dart';
 import 'package:admin/features/schedule/domain/models/schedule_model.dart';
 import 'package:admin/features/schedule/domain/providers/schedule_provider.dart';
+import 'package:admin/shared/domain/providers/supabase_service_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -36,11 +37,15 @@ class NewScheduleController extends _$NewScheduleController {
   Future<void> createSchedule(
       {required DateTime date, required TimeOfDay time}) async {
     state = const AsyncLoading();
+    final userId = ref.read(supabaseAuthServiceProvider).currentUser?.id;
     final scheduleDate =
         DateTime(date.year, date.month, date.day, time.hour, time.minute);
     final res = await ref.read(scheduleRepositoryProvider).createSchedule(
           scheduleModel: ScheduleModel(
-              title: state.requireValue.title.value, date: scheduleDate),
+            title: state.requireValue.title.value,
+            date: scheduleDate,
+            userId: userId,
+          ),
         );
     state = res.fold(
       (l) => AsyncValue.error(l.message ?? '', StackTrace.current),
