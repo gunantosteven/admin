@@ -13,12 +13,14 @@ class UserModel with _$UserModel {
   const factory UserModel({
     @JsonKey(includeIfNull: false) String? id,
     @Default('') String name,
+    required String authId,
   }) = _UserModel;
 
   static const tableName = 'user';
 
   static const idKey = 'id';
   static const nameKey = 'name';
+  static const authIdKey = 'auth_id';
 
   /// Serialization
   factory UserModel.fromJson(Map<String, dynamic> json) =>
