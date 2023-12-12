@@ -10,7 +10,7 @@ Map<String, dynamic> ktestScheduleMap = {
   "user": {
     "id": "da2a8ca2-1763-4a16-b073-1d0da5fdceac",
     "name": "admin",
-    "created_at": "2023-11-15T13:20:33.795Z"
+    "auth_id": "da2a8ca2-1763-4a16-b073-1d0da5fdceac"
   }
 };
 
