@@ -1,3 +1,4 @@
+import 'package:admin/shared/constant/page_constant.dart';
 import 'package:admin/shared/exceptions/http_exception.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -56,15 +57,21 @@ class SupabaseService {
     String select = '',
     required String columnSearch,
     required String pattern,
-    required String orderKey,
-    required bool ascending,
-    required int limit,
+    String? orderKey,
+    bool ascending = true,
+    int limit = pageLimit,
   }) async {
-    return await supabaseClient
+    dynamic builder = supabaseClient
         .from(tableName)
         .select(select)
-        .ilike(columnSearch, '%$pattern%')
-        .order(orderKey, ascending: ascending)
-        .limit(limit);
+        .ilike(columnSearch, '%$pattern%');
+
+    if (orderKey != null) {
+      builder = builder.order(orderKey, ascending: ascending);
+    }
+
+    builder.limit(limit);
+
+    return await builder;
   }
 }
