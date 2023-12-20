@@ -119,5 +119,6 @@ flutter:
   uses-material-design: true
   generate: true
 
-  assets:
-    - env
+  # uncomment this after add env file
+  # assets:
+  #   - env

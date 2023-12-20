@@ -19,6 +19,13 @@ Flutter Stack:
 
 Change env.example to env and change the data inside.
 
+Uncomment this in pubspec.yaml
+
+```yml
+assets:
+  - .env
+```
+
 then run flutter pub run build_runner watch --delete-conflicting-outputs
 
 ## Run build runner command

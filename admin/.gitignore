@@ -35,6 +35,7 @@ migrate_working_dir/
 **/*.mocks.dart
 **/*.g.dart
 **/*.gr.dart
+*env
 
 # Symbolication related
 app.*.symbols
