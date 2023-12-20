@@ -9,7 +9,7 @@ void main() => mainCommon(AppEnvironment.PROD);
 
 Future<void> mainCommon(AppEnvironment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: "env");
+  await dotenv.load(fileName: "env/env");
   EnvInfo.initialize(environment);
   await Supabase.initialize(
     url: EnvInfo.supabaseString,

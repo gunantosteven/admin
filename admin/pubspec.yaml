@@ -120,5 +120,5 @@ flutter:
   generate: true
 
   # uncomment this after add env file
-  # assets:
-  #   - env
+  assets:
+    - env/
