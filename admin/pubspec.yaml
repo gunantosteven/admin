@@ -67,7 +67,7 @@ dependencies:
   # Annotations for the freezed code-generator. This package does nothing without freezed too
   freezed_annotation: ^2.4.1
 
-  # Easily configure any flutter application with global variables using a `.env` file.
+  # Easily configure any flutter application with global variables using a `env` file.
   flutter_dotenv: ^5.1.0
 
   # A package exposing annotations for riverpod_generator

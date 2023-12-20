@@ -17,7 +17,7 @@ Flutter Stack:
 
 ## How to run
 
-Change .env.example to .env and change the data inside.
+Change env.example to env and change the data inside.
 
 then run flutter pub run build_runner watch --delete-conflicting-outputs
 
