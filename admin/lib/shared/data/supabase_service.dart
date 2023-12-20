@@ -74,4 +74,24 @@ class SupabaseService {
 
     return await builder;
   }
+
+  Future<dynamic> filter({
+    String select = '',
+    required String columnSearch,
+    required String value,
+    String? orderKey,
+    bool ascending = true,
+    int limit = pageLimit,
+  }) async {
+    dynamic builder =
+        supabaseClient.from(tableName).select(select).eq(columnSearch, value);
+
+    if (orderKey != null) {
+      builder = builder.order(orderKey, ascending: ascending);
+    }
+
+    builder.limit(limit);
+
+    return await builder;
+  }
 }

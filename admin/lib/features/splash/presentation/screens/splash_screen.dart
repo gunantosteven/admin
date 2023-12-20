@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/domain/providers/supabase_service_provider.dart';
 import 'package:auto_route/auto_route.dart';

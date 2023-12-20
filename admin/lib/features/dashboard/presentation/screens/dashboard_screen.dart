@@ -1,5 +1,6 @@
 import 'package:admin/features/dashboard/application/expand_navigation_controller.dart';
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
+import 'package:admin/features/user/application/controller/check_user_controller.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/theme/app_padding.dart';
 import 'package:admin/shared/theme/app_theme.dart';
@@ -44,6 +45,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
       parent: controller,
       curve: const Interval(0.5, 1.0),
     );
+
+    ref.read(checkUserControllerProvider.notifier).checkUser();
   }
 
   @override

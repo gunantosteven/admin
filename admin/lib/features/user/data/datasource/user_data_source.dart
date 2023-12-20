@@ -42,9 +42,9 @@ class UserSupabaseDataSource implements UserDataSource {
     try {
       // check if user exist or not
       final listData = await supabaseService
-          .search(
+          .filter(
         columnSearch: UserModel.idKey,
-        pattern: id,
+        value: id,
       )
           .then((event) {
         var list = <UserModel>[];
