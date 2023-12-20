@@ -121,4 +121,4 @@ flutter:
 
   # uncomment this after add env file
   assets:
-    - envoriment/
+    - environment/
