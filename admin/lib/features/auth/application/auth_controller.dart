@@ -35,6 +35,10 @@ class AuthController extends _$AuthController {
         (success) => AsyncValue.data(success));
   }
 
+  void logout() {
+    ref.read(supabaseAuthServiceProvider).signOut();
+  }
+
   bool isAlreadyLogin() {
     final session = ref.watch(supabaseAuthServiceProvider).currentSession;
 

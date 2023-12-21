@@ -1,8 +1,10 @@
+import 'package:admin/features/auth/application/auth_controller.dart';
 import 'package:admin/features/dashboard/application/expand_navigation_controller.dart';
 import 'package:admin/features/dashboard/presentation/widgets/navigation_transition.dart';
 import 'package:admin/features/user/application/controller/check_user_controller.dart';
 import 'package:admin/routes/app_route.dart';
 import 'package:admin/shared/theme/app_padding.dart';
+import 'package:admin/shared/theme/app_spacer.dart';
 import 'package:admin/shared/theme/app_theme.dart';
 import 'package:admin/shared/widgets/custom_button.dart';
 import 'package:admin/shared/widgets/custom_text.dart';
@@ -120,6 +122,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
             showTooltipBelow: false,
           ),
           _ExpandButton(),
+          AppSpacer.height16,
+          _LogoutButton(),
         ],
       );
 
@@ -182,30 +186,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
   }
 }
 
-class _BrightnessButton extends ConsumerWidget {
-  const _BrightnessButton({
-    this.showTooltipBelow = true,
-  });
-
-  final bool showTooltipBelow;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isBright = ref.read(appThemeProvider) == ThemeMode.light;
-    return Tooltip(
-      preferBelow: showTooltipBelow,
-      message: 'Toggle brightness',
-      child: CustomButton(
-        buttonType: ButtonType.ICON,
-        icon: isBright ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
-        onPressed: () {
-          ref.read(appThemeProvider.notifier).toggleTheme();
-        },
-      ),
-    );
-  }
-}
-
 class _ExpandedTrailingActions extends ConsumerWidget {
   const _ExpandedTrailingActions();
 
@@ -241,12 +221,47 @@ class _ExpandedTrailingActions extends ConsumerWidget {
               ),
             ],
           ),
+          AppSpacer.height16,
+          Row(
+            children: [
+              const Text('Log Out'),
+              Expanded(child: Container()),
+              const Padding(
+                padding: AppPadding.right8,
+                child: _LogoutButton(),
+              ),
+            ],
+          ),
         ],
       ),
     );
     return screenHeight > 740
         ? trailingActionsBody
         : SingleChildScrollView(child: trailingActionsBody);
+  }
+}
+
+class _BrightnessButton extends ConsumerWidget {
+  const _BrightnessButton({
+    this.showTooltipBelow = true,
+  });
+
+  final bool showTooltipBelow;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isBright = ref.read(appThemeProvider) == ThemeMode.light;
+    return Tooltip(
+      preferBelow: showTooltipBelow,
+      message: 'Toggle brightness',
+      child: CustomButton(
+        buttonType: ButtonType.ICON,
+        icon: isBright ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+        onPressed: () {
+          ref.read(appThemeProvider.notifier).toggleTheme();
+        },
+      ),
+    );
   }
 }
 
@@ -261,6 +276,22 @@ class _ExpandButton extends ConsumerWidget {
       icon: isExpand ? Icons.arrow_back : Icons.arrow_forward,
       onPressed: () {
         ref.read(expandNavigationControllerProvider.notifier).expand();
+      },
+    );
+  }
+}
+
+class _LogoutButton extends ConsumerWidget {
+  const _LogoutButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return CustomButton(
+      buttonType: ButtonType.ICON,
+      icon: Icons.logout,
+      onPressed: () {
+        ref.read(authControllerProvider.notifier).logout();
+        AutoRouter.of(context).replace(const AuthRoute());
       },
     );
   }
