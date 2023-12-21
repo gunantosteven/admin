@@ -68,57 +68,55 @@ class ColorPalettesScreen extends ConsumerWidget {
           ),
         );
 
-    return Expanded(
-      child: LayoutBuilder(builder: (context, constraints) {
-        if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return SingleChildScrollView(
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth < narrowScreenWidthThreshold) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              dynamicColorNotice(),
+              divider,
+              schemeLabel('Light ColorScheme'),
+              schemeView(lightTheme),
+              divider,
+              divider,
+              schemeLabel('Dark ColorScheme'),
+              schemeView(darkTheme),
+            ],
+          ),
+        );
+      } else {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5),
             child: Column(
               children: [
                 dynamicColorNotice(),
-                divider,
-                schemeLabel('Light ColorScheme'),
-                schemeView(lightTheme),
-                divider,
-                divider,
-                schemeLabel('Dark ColorScheme'),
-                schemeView(darkTheme),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          schemeLabel('Light ColorScheme'),
+                          schemeView(lightTheme),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          schemeLabel('Dark ColorScheme'),
+                          schemeView(darkTheme),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-          );
-        } else {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Column(
-                children: [
-                  dynamicColorNotice(),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            schemeLabel('Light ColorScheme'),
-                            schemeView(lightTheme),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            schemeLabel('Dark ColorScheme'),
-                            schemeView(darkTheme),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-      }),
-    );
+          ),
+        );
+      }
+    });
   }
 }
 

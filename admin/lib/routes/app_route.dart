@@ -1,7 +1,7 @@
-import 'package:admin/features/dashboard/presentation/screens/color_palettes_screen.dart';
+import 'package:admin/features/design_system/presentation/screens/color_palettes_screen.dart';
 import 'package:admin/features/dashboard/presentation/screens/dashboard_screen.dart';
-import 'package:admin/features/dashboard/presentation/screens/elevation_screen.dart';
-import 'package:admin/features/dashboard/presentation/screens/typography_screen.dart';
+import 'package:admin/features/design_system/presentation/screens/elevation_screen.dart';
+import 'package:admin/features/design_system/presentation/screens/typography_screen.dart';
 import 'package:admin/features/schedule/presentation/screens/schedule_screen.dart';
 import 'package:admin/features/schedule/presentation/screens/new_schedule_screen.dart';
 import 'package:admin/features/schedule/presentation/screens/update_schedule_screen.dart';
