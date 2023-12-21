@@ -16,6 +16,7 @@ Features so far:
 - Localization
 - Theme Dark or Light
 - Form Validation
+- Unit Testing
 
 Example on Web : https://eclectic-custard-747c4b.netlify.app/
 
