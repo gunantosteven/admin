@@ -17,5 +17,6 @@ Features so far:
 - Theme Dark or Light
 - Form Validation
 
+Example on Web : https://eclectic-custard-747c4b.netlify.app/
 
 [Check the Project Stack](https://github.com/gunantosteven/admin/tree/main/admin#readme)
