@@ -30,5 +30,6 @@
   "deleteScheduleDesc": "Are you sure to remove this schedule?",
   "scheduleEmpty": "No Schedule Found",
   "delete": "Delete",
-  "searchSchedule": "Search Schedule"
+  "searchSchedule": "Search Schedule",
+  "desc": "Description"
 }

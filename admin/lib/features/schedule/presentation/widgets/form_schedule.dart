@@ -18,6 +18,7 @@ class FormSchedule extends ConsumerStatefulWidget {
     this.titleValidator,
     this.enabledButton = true,
     required this.titleController,
+    required this.descController,
     required this.onConfirm,
   });
 
@@ -32,6 +33,8 @@ class FormSchedule extends ConsumerStatefulWidget {
   final bool enabledButton;
 
   final TextEditingController titleController;
+
+  final TextEditingController descController;
 
   final Function(DateTime date, TimeOfDay time)? onConfirm;
 
@@ -70,6 +73,12 @@ class _FormScheduleState extends ConsumerState<FormSchedule> {
             placeholder: AppLocalizations.of(context)!.title,
             onChanged: widget.onChangedTitle,
             validator: widget.titleValidator,
+          ),
+          AppSpacer.height16,
+          CustomTextField(
+            textFieldType: TextFieldType.MULTILINE,
+            controller: widget.descController,
+            placeholder: AppLocalizations.of(context)!.desc,
           ),
           AppSpacer.height16,
           CustomDate(

@@ -26,6 +26,7 @@ class UpdateScheduleScreen extends ConsumerStatefulWidget {
 
 class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
   final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descController = TextEditingController();
 
   @override
   void initState() {
@@ -83,6 +84,7 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
         children: [
           FormSchedule(
             titleController: _titleController,
+            descController: _descController,
             onChangedTitle: (value) => notifier.updateTitle(value),
             titleValidator: (value) => watch.value?.title.error?.getMessage(),
             enabledButton: notifier.isValidForm(),

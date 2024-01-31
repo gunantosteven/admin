@@ -2,7 +2,7 @@ import 'package:admin/shared/theme/app_padding.dart';
 import 'package:flutter/material.dart';
 
 // ignore: constant_identifier_names
-enum TextFieldType { DEFAULT, SEARCH }
+enum TextFieldType { DEFAULT, SEARCH, MULTILINE }
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -56,6 +56,23 @@ class CustomTextField extends StatelessWidget {
           ),
           onTap: onTap,
           readOnly: readOnly,
+        );
+      case TextFieldType.MULTILINE:
+        return TextFormField(
+          key: key,
+          controller: controller,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: placeholder,
+          ),
+          onTap: onTap,
+          readOnly: readOnly,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
+          onChanged: onChanged,
+          keyboardType: TextInputType.multiline,
+          minLines: 3,
+          maxLines: null,
         );
       default:
         return TextFormField(
