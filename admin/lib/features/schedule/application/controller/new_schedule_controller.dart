@@ -35,7 +35,9 @@ class NewScheduleController extends _$NewScheduleController {
   }
 
   Future<void> createSchedule(
-      {required DateTime date, required TimeOfDay time}) async {
+      {required String description,
+      required DateTime date,
+      required TimeOfDay time}) async {
     state = const AsyncLoading();
     final userId = ref.read(supabaseAuthServiceProvider).currentUser?.id;
     final scheduleDate =
@@ -43,6 +45,7 @@ class NewScheduleController extends _$NewScheduleController {
     final res = await ref.read(scheduleRepositoryProvider).createSchedule(
           scheduleModel: ScheduleModel(
             title: state.requireValue.title.value,
+            description: description,
             date: scheduleDate,
             userId: userId,
           ),

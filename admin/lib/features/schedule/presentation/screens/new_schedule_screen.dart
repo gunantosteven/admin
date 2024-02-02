@@ -22,7 +22,7 @@ class NewScheduleScreen extends ConsumerStatefulWidget {
 
 class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
   final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descController = TextEditingController();
+  final TextEditingController _descController = TextEditingController(text: '');
 
   @override
   void initState() {
@@ -77,7 +77,11 @@ class _NewScheduleScreenState extends ConsumerState<NewScheduleScreen> {
             titleValidator: (value) => title?.error?.getMessage(),
             enabledButton: notifier.isValidForm(),
             onConfirm: (date, time) {
-              notifier.createSchedule(date: date, time: time);
+              notifier.createSchedule(
+                description: _descController.text,
+                date: date,
+                time: time,
+              );
             },
           ),
           Consumer(

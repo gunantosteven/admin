@@ -18,6 +18,7 @@ class ScheduleModel with _$ScheduleModel {
   const factory ScheduleModel({
     @JsonKey(includeIfNull: false) String? id,
     @Default('') String title,
+    @Default('') String description,
     required DateTime date,
     String? userId,
     @JsonKey(name: 'user') UserModel? userModel,
@@ -28,6 +29,7 @@ class ScheduleModel with _$ScheduleModel {
 
   static const idKey = 'id';
   static const titleKey = 'title';
+  static const descriptionKey = 'description';
   static const dateKey = 'date';
   static const userIdKey = 'user_id';
   static const userKey = 'user';

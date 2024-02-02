@@ -60,6 +60,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
         {
           ScheduleModel.idKey: generateNewUuid,
           ScheduleModel.titleKey: scheduleModel.title,
+          ScheduleModel.descriptionKey: scheduleModel.description,
           ScheduleModel.dateKey: scheduleModel.date.toString(),
           ScheduleModel.createdAtKey: DateTime.now().toString(),
           ScheduleModel.userIdKey: scheduleModel.userId
@@ -84,6 +85,7 @@ class ScheduleSupabaseDataSource implements ScheduleDataSource {
       await supabaseService.update(
         {
           ScheduleModel.titleKey: scheduleModel.title,
+          ScheduleModel.descriptionKey: scheduleModel.description,
           ScheduleModel.dateKey: scheduleModel.date.toString(),
         },
         match: {ScheduleModel.idKey: scheduleModel.id},

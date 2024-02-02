@@ -26,7 +26,7 @@ class UpdateScheduleScreen extends ConsumerStatefulWidget {
 
 class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
   final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descController = TextEditingController();
+  final TextEditingController _descController = TextEditingController(text: '');
 
   @override
   void initState() {
@@ -39,6 +39,7 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
     // });
 
     _titleController.text = widget.scheduleModel.title;
+    _descController.text = widget.scheduleModel.description;
   }
 
   @override
@@ -92,6 +93,7 @@ class _NewScheduleScreenState extends ConsumerState<UpdateScheduleScreen> {
             onConfirm: (date, time) {
               notifier.updateSchedule(
                 currentSchedule: widget.scheduleModel,
+                newDescription: _descController.text,
                 newDate: date,
                 newTime: time,
               );

@@ -35,13 +35,16 @@ class UpdateScheduleController extends _$UpdateScheduleController {
 
   Future<void> updateSchedule(
       {required ScheduleModel currentSchedule,
+      required String newDescription,
       required DateTime newDate,
       required TimeOfDay newTime}) async {
     state = const AsyncLoading();
     final newScheduleDate = DateTime(
         newDate.year, newDate.month, newDate.day, newTime.hour, newTime.minute);
-    final updateSchedule = currentSchedule.copyWith
-        .call(title: state.requireValue.title.value, date: newScheduleDate);
+    final updateSchedule = currentSchedule.copyWith.call(
+        title: state.requireValue.title.value,
+        description: newDescription,
+        date: newScheduleDate);
     final res = await ref
         .read(scheduleRepositoryProvider)
         .updateSchedule(scheduleModel: updateSchedule);
